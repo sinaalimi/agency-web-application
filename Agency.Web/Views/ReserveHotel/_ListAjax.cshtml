@@ -1,0 +1,10 @@
+﻿@model  Agency.ViewModel.ReserveHotel.ListReserveHotelViewmodel
+
+@foreach (var mainhotel in Model.MainHotels)
+{
+    @Html.Partial("_MainHotelItem", mainhotel)
+}
+
+
+
+

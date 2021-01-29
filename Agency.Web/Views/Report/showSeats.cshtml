@@ -1,0 +1,80 @@
+﻿@using System.Runtime.CompilerServices
+@using System.Web.Optimization
+@using Agency.Common.HtmlHelpers
+@using Agency.ViewModel.Report
+@model Agency.ViewModel.Report.SeatListViewModel
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="tab-content" style="height: auto;overflow-y: scroll; width: auto; overflow-x:scroll">
+            <div class="row col-md-11" style="margin-top: 15px; margin-right: 10px;">
+                <table class="table table-striped" style="border: 3px solid #ecf0f1; text-align: center;" id="FormContainer">
+                    <tr style="background-color: #dff0d8;">
+
+                        <td class="col-md-1">ردیف</td>
+                        <td class="col-md-1">نام تور</td>
+                        <td class="col-md-1">نام دفتر</td>
+                        <td class="col-md-1">نام </td>
+                        <td class="col-md-1">نام خانوادگی </td>
+                        <td class="col-md-1">نام سرپرست </td>
+                        <td class="col-md-1">نسبت</td>
+                        <td class="col-md-1">نام وسیله نقلیه </td>
+                        <td class="col-md-1"> شماره صندلی</td>
+
+
+
+
+                    </tr>
+                    @{
+                        int a = 1;
+                        foreach (var item in Model.SeatsList)
+                        {
+                            <tr>
+                                <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@a</td>
+                                <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.TourName</td>
+                                <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.UserName</td>
+                                <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.Name</td>
+                                <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.LastName</td>
+                                <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.ParentName</td>
+                                <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.Relation</td>
+                                <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.VehicleName</td>
+                                <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.SeatNo</td>
+                            </tr>
+                            a++;
+                        }
+                    }
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="panel-footer">
+        <div class="pull-left">
+            <a href="@Url.Action("ExportSeats", "Report", new {id = Model.SeatsList[0].TourId})" type="button" autocomplete="off" data-loading-text="در حال پرینت" class="btn btn-success btn-md  ">
+                پرینت
+            </a>
+            <a href="@Url.Action("ExportSeatSchema","Report" , new {id = Model.SeatsList[0].TourId})" type="button" autocomplete="off" data-loading-text="در حال پرینت" class="btn btn-success btn-md  ">
+                شمای صندلی ها
+            </a>
+            <a href="@Url.Action("List", "Report")" class="btn btn-default btn-md">انصراف</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+</div>
+
+@section Menu{
+    @{Html.RenderPartial("_ReportManagementSideBar");}
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/datePicker")
+    <script>
+        $(function () {
+            $('.select').select2({});
+        });
+    </script>
+}

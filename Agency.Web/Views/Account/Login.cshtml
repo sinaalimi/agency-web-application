@@ -1,0 +1,66 @@
+﻿@using System.Web.Optimization
+@using CaptchaMvc.HtmlHelpers
+@using Agency.Common.HtmlHelpers
+@model Agency.ViewModel.Account.LoginViewModel
+@{
+    ViewBag.Title = "ورود به سیستم";
+}
+<div class="row margin-top-5">
+    @using (Html.BeginForm("Login", "Account", new { ViewBag.ReturnUrl }, FormMethod.Post, htmlAttributes: new { @class = "form-horizontal", role = "form", id = "loginForm", autocomplete = "off" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="col-md-10 col-md-offset-1">
+            <div class="panel  panel-default">
+                <div class="panel-heading">
+                    @Html.HelpAlert(Url.Content("~/Content/Images/lightbulb.png"),
+     "کاربر گرامی بعد از ورود به حساب کاربری خود ، خواهید توانست از امکانات سیستم بهره مند شوید.")
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.UserName, new { @class = "col-md-3 control-label" })
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", dir = "ltr" })
+                                        @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Password, new {@class = "col-md-3 control-label"})
+                                    <div class="col-md-6">
+                                        @Html.PasswordFor(m => m.Password, new {@class = "form-control", dir = "ltr"})
+                                        @Html.ValidationMessageFor(m => m.Password, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-md-offset-3">
+                                        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "checkbox-inline" })
+                                        @Html.LabelFor(m => m.RememberMe, new { @class = "control-label" })
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button type="button" autocomplete="off" onclick="AjaxForm.CustomSubmit(this, 'loginForm')" data-loading-text="در حال ارسال اطلاعات" class="btn btn-success btn-block">
+                        ورود به حساب کاربری
+                    </button>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

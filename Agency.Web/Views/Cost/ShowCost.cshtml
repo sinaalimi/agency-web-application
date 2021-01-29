@@ -1,0 +1,189 @@
+﻿@using System.Runtime.CompilerServices
+@using System.Web.Optimization
+@using Agency.Common.HtmlHelpers
+@model Agency.ViewModel.Cost.ShowCostViewModel
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="tab-content">
+                <div class="row col-md-11" style="margin-top: 15px; margin-right: 10px;">
+                    <table class="table table-striped" style="border: 3px solid #ecf0f1; text-align: center;" id="FormContainer">
+                        <tr style="background-color: #dff0d8;">
+                            <td class="col-md-2"></td>
+                            <td class="col-md-3">بزرگسال</td>
+                            <td class="col-md-3">کودک</td>
+                            <td class="col-md-3">نوزاد</td>
+
+                        </tr>
+                        <tr>
+                            <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">تعداد</td>
+                            @if (Model.Adult.Count > 0)
+                            {
+                                <td class="col-md-3">@Model.Adult.Count</td>
+                            }
+                            else
+                            {
+                                <td class="col-md-3">0</td>
+                            }
+                            @if (Model.Child.Count > 0)
+                            {
+                                <td class="col-md-3">@Model.Child.Count</td>
+                            }
+                            else
+                            {
+                                <td class="col-md-3">0</td>
+                            }
+                            @if (Model.Baby.Count > 0)
+                            {
+                                <td class="col-md-3">@Model.Baby.Count</td>
+                            }
+                            else
+                            {
+                                <td class="col-md-3">0</td>
+                            }
+
+
+                        </tr>
+                        <tr>
+                            <td class="col-md-2"  style="padding-right: 25px; background-color: #d9edf7;">هزینه پایه</td>
+                            @if (Model.Adult.Count > 0)
+                            {
+                                <td class="col-md-3">@Model.Adult.BasePrice</td>
+                            }
+                            else
+                            {
+                                <td class="col-md-3"></td>
+                            }
+                            @if (Model.Child.Count > 0)
+                            {
+                                <td class="col-md-3">@Model.Child.BasePrice</td>
+                            }
+                            else
+                            {
+                                <td class="col-md-3"></td>
+                            }
+                            @if (Model.Baby.Count > 0)
+                            {
+                                <td class="col-md-3">@Model.Baby.BasePrice</td>
+                            }
+                            else
+                            {
+                                <td class="col-md-3"></td>
+                            }
+
+                        </tr>
+                        <tr>
+                            <td class="col-md-2"  style="padding-right: 25px; background-color: #d9edf7;">هزینه بیمه </td>
+                            @if (Model.Adult.Count > 0)
+                            {
+                                <td class="col-md-3">@Model.InsurancPrice</td>
+                            }
+                            else
+                            {
+                                <td class="col-md-3"></td>
+                            }
+                            @if (Model.Child.Count > 0)
+                            {
+                                <td class="col-md-3">@Model.InsurancPrice</td>
+                            }
+                            else
+                            {
+                                <td class="col-md-3"></td>
+                            }
+                            @if (Model.Baby.Count > 0)
+                            {
+                                <td class="col-md-3">@Model.InsurancPrice</td>
+                            }
+                            else
+                            {
+                                <td class="col-md-3"></td>
+                            }
+
+                        </tr>
+                        @{
+                            if (Model.CoupleBed)
+                            {
+                                <tr>
+                                    <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">تخت دو نفره</td>
+                                    @if (Model.Adult.Count > 0)
+                                    {
+                                        <td class="col-md-3">@Model.CoupleBedPrice</td>
+                                    }
+                                    <td class="col-md-3"></td>
+                                    <td class="col-md-3"></td>
+                                </tr>
+                            }
+                        }
+                        <tr>
+                            <td class="col-md-2"  style="padding-right: 25px; background-color: #d9edf7;">مجموع</td>
+                            @if (Model.Adult.Count > 0)
+                            {
+                                <td class="col-md-3">@Model.Adult.TotalCost</td>
+                            }
+                            else
+                            {
+                                <td class="col-md-3">0</td>
+                            }
+                            @if (Model.Child.Count > 0)
+                            {
+                                <td class="col-md-3">@Model.Child.TotalCost</td>
+                            }
+                            else
+                            {
+                                <td class="col-md-3">0</td>
+                            }
+                            @if (Model.Baby.Count > 0)
+                            {
+                                <td class="col-md-3">@Model.Baby.TotalCost</td>
+                            }
+                            else
+                            {
+                                <td class="col-md-3">0</td>
+                            }
+
+                        </tr>
+
+                    </table>
+                    <div class="col-md-3" style=" float: left; border: 1px solid #c0f0c1; border-radius: 3px; background-color: #f7fff7;">
+                        <div class="col-md-12" style="padding: 15px; height: 50px; margin-left: 20px;">
+                            <span >مجموع کل :</span> 
+                            <span style="float: left;">@Model.TotalCost</span>
+
+                        </div>
+                       
+                        
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+            <div class="panel-footer">
+                <div class="pull-left">
+                    @if (Model.IsTemporary)
+                    {
+                        <a href="@Url.Action("SetTemporary", "Reserve", new {reserveid = Model.ReserveId})" class="btn btn-default btn-md"> تایید نهایی</a>
+                    }
+                    else
+                    {
+                        <a href="@Url.Action("DownloadContractFile", "Reserve", new {filename = Model.ContractFilepath})" class="btn btn-default btn-md"> دانلود فایل قرارداد</a>
+                    }
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        
+    </div>
+
+@section Menu{
+    @{Html.RenderPartial("_ReserveManagmentSideBar");}
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $(function () {
+            $('.select').select2({});
+        });
+    </script>
+}

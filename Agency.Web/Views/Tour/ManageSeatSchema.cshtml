@@ -1,0 +1,320 @@
+﻿@using System.Web.Optimization
+@using OfficeOpenXml.FormulaParsing.Excel.Functions.Math
+@model Agency.ViewModel.Reserve.ReserveSeatViewModel
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+    </div>
+
+    <div class="panel-body">
+        <div class="" style="margin-top: 15px;">
+
+            <div class="row" style="margin-top: 25px;" id="">
+                <div class="row">
+                    <div id="persondiv" class="col-md-8">
+                        <div class="row" style="margin-top: 5px;">
+                            <div class="col-md-3 col-md-offset-1">
+                                <button aria-controls="show-search" aria-expanded="false" class="btn btn-default  btn-block" data-target="#ShowParent" data-toggle="collapse" type="button">
+                                    <i class="fa fa-user"></i>
+                                    تغییر صندلی
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row collapse" style="margin-top: 25px;" id="ShowParent">
+                            <div class="row">
+                                @using (Html.BeginForm("ChangeSeats", "Tour", FormMethod.Post, new { role = "form", @class = "form-horizontal", autocomplete = "off", id = "CreateVehicleForm" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(p => Model.TourVehicleId)
+                                    @*<hr class="margin-bottom-5 margin-top-5" />*@
+                                    <div class="row" style="margin-top: 15px;">
+                                        <div class="row" style="margin-right: 115px !important;">
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-5" for="FromSeat">از صندلی</label>
+                                                    <div class="col-md-7">
+                                                        @Html.TextBoxFor(p => p.FromSeat, new { @class = "form-control numbertxt" })
+                                                        @Html.ValidationMessageFor(model => model.FromSeat, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-5" for="FromSeat">به صندلی</label>
+                                                    <div class="col-md-7">
+                                                        @Html.TextBoxFor(p => p.ToSeat, new { @class = "form-control numbertxt" })
+                                                        @Html.ValidationMessageFor(model => model.ToSeat, "", new { @class = "text-danger" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <button type="button" autocomplete="off" onclick="AjaxForm.CustomSubmit(this, 'CreateVehicleForm')" data-loading-text="در حال ارسال اطلاعات" class="btn btn-warning btn-md">
+                                                اعمال تغییر
+                                            </button>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div style="direction: ltr" class="col-md-3">
+                        <div style="direction: rtl;" class="col-md-offset-3">
+                            <span>نام وسیله نقلیه: </span>
+                            <span>@Model.VehicleName</span>
+                        </div>
+                        <br/>
+                        <table class="seats" style="direction: rtl; border-collapse: separate; border-spacing: 3px; border-radius: 10px; padding: 10px; background-color: #ECF0F1;">
+                            <tbody>
+                            <tr>
+
+                                <td colspan="4" class="co-name"></td>
+                                <td style="background-color: #fbfbfb;" class="tooltipstered">
+                                    <img height="30" src="/Content/Images/driver.png" alt="راننده اتوبوس">
+                                </td>
+                            </tr>
+
+                            @{
+                                var maxrow = Model.SeatList.Max(p => p.Row);
+                                var seatlistindex = 0;
+                                var totalseatscount = Model.SeatList.Count;
+                            }
+                            @for (var index = 0; index <= maxrow; index++)
+                            {
+                                var indexname = "seatitem-" + @index.ToString();
+                                <tr id=@indexname>
+                                    @for (int i = 0; i < 5; i++)
+                                    {
+                                        if (seatlistindex == totalseatscount)
+                                        {
+                                            break;
+                                        }
+                                        var flag = Model.SeatList[seatlistindex].Row == index && Model.SeatList[seatlistindex].Col == i;
+                                        var gender = Model.SeatList[seatlistindex].SeatGender;
+                                        var empty = Model.SeatList[seatlistindex].Isempty;
+                                        var ishamguruh = Model.SeatList[seatlistindex].IsHamGuruh;
+                                        var isdeactive = Model.SeatList[seatlistindex].IsDeactive;
+                                        var isSeatDetailVisible = Model.SeatList[seatlistindex].IsDetailVisible;
+                                        string color = "";
+                                        if (isdeactive)
+                                        {
+                                            color = "#dbaa7f;";
+                                        }
+                                        else if (empty)
+                                        {
+                                            color = "#bbdda6;";
+                                        }
+                                        else
+                                        {
+                                            color = "#d3acac;";
+                                        }
+                                        <td id="@{ ("seat" + i).ToString();}" class="@(empty ? "" : "empty-seat")" style="background-color: @color @(flag ? "" : "opacity:0; cursor:default;") @(empty ? "cursor:default;" : "") @(ishamguruh ? "background:#CACEAD;" : "")" value="">
+                                            @if (flag)
+                                            {
+                                                var datacontent = "<p style='font-size:15px; color:#60646D;'>" + Model.SeatList[seatlistindex].Name + "</p>";
+                                                if (!empty && isdeactive == false)
+                                                {
+                                                    if (gender)
+                                                    {
+                                                        <a tabindex="0" style="display: block; background: transparent;" @*class="popover-a"*@ role="button" title="" data-toggle=@(isSeatDetailVisible ? "popover" : "") data-placement="top" data-trigger="click" data-html="true" data-content="@(isSeatDetailVisible ? @datacontent : "")" data-original-title="اطلاعات شخص">
+                                                            <img src="/Content/Images/man1.png" style="cursor: default; height: 40px; width: 40px;">
+                                                        </a>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <a tabindex="0" style="display: block; background: transparent;" @*class="popover-a"*@ role="button" title="" data-toggle="@(isSeatDetailVisible ? "popover" : "")" data-placement="top" data-trigger="click" data-html="true" data-content="@(isSeatDetailVisible ? @datacontent : "")" data-original-title="اطلاعات شخص">
+                                                            <img src="/Content/Images/woman1.png" style="cursor: default; height: 40px; width: 40px;">
+                                                        </a>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <a tabindex="0" style="display: block;" @*class="popover-a"*@ role="button" title="" data-toggle="popover" data-placement="top" data-trigger="click" data-html="true"
+                                                       data-content="<table style='width:130px; height:50px; border-collapse:separate; border-radius:5px; border-spacing:5px;'><tbody><tr><td onclick=DeactiveSeat('@Model.TourVehicleId','@Model.SeatList[seatlistindex].SeatNumber') style='font-size:12px;'>غیر فعال</td><td onclick=activeSeat('@Model.TourVehicleId','@Model.SeatList[seatlistindex].SeatNumber') style='font-size:12px;'> فعال</td></tr></tbody></table>"
+                                                       data-original-title="گزینه ها">
+                                                        <span>
+                                                            @Model.SeatList[seatlistindex].SeatNumber
+                                                        </span>
+                                                    </a>
+                                                }
+                                                seatlistindex++;
+                                            }
+                                        </td>
+                                    }
+                                </tr>
+                            }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+            .seat-span {
+                vertical-align: middle;
+                line-height: 1;
+                font-size: 28px;
+            }
+
+            .seat-span-woman {
+                color: #900;
+            }
+
+            .seat-span-man {
+                color: #009;
+            }
+
+            .popover-a {
+                width: 100%;
+                display: inline-block;
+                height: 30px;
+                margin: -3px;
+                vertical-align: middle;
+                padding-top: 4px;
+                text-decoration: none !important;
+                color: black;
+            }
+
+            .popover-content {
+                font-size: 18px !important;
+            }
+
+            .tooltipster-base {
+                text-align: center;
+                min-width: 120px;
+                font-size: 18px !important;
+                font-family: IRANSans !important;
+            }
+
+            .main-context-left-body-hotel {
+                background-color: #fbfbfb;
+                border: 1px solid #edeeef;
+            }
+
+            .seats tr > td {
+                width: 40px;
+                /*padding: 3px 0px;*/
+                border: 1px solid gray;
+                border-radius: 3px;
+                height: 40px;
+                text-align: center;
+            }
+
+            .seats img {
+                width: 24px;
+            }
+
+            .empty-seat {
+                cursor: pointer;
+            }
+
+            .select-seat {
+                background-color: #00ff14 !important;
+            }
+
+            .bold1 {
+                display: inline-block !important;
+                width: initial !important;
+                float: none !important;
+                font-size: 1.8em !important;
+                color: #302fa0 !important;
+                font-weight: bold !important;
+            }
+
+            .bold2 {
+                display: inline-block !important;
+                width: initial !important;
+                float: none !important;
+                font-size: 1.8em !important;
+                color: #fcad2a !important;
+                font-weight: bold !important;
+            }
+
+            .spanlabel {
+                direction: rtl;
+                text-align: left;
+                padding-left: 20px;
+                color: #939598;
+                font-size: 1.7em;
+            }
+
+            .passenger-man, .passenger-woman {
+                font-size: 0.8em;
+                padding: 0;
+                height: 0;
+            }
+
+            .passenger-man:hover, .passenger-woman:hover {
+                background-color: #00ff14 !important;
+            }
+
+            .co-name {
+                border: none !important;
+                font-weight: bold;
+                font-size: 1.3em;
+                line-height: normal;
+                text-shadow: 2px 2px 5px #ffffff;
+            }
+
+            .passenger-disable {
+                background-color: #a5a8af !important;
+            }
+
+            .passenger-disable:hover {
+                background-color: #a5a8af !important;
+            }
+
+            .invalid-input {
+                border: 1px solid #ff6a6a;
+                background-color: #ffe8e8;
+            }
+
+            .right-col-1-btn:hover {
+                color: white !important;
+            }
+
+            .selectable {
+                cursor: pointer;
+                background: #53e9ff !important;
+            }
+
+            .frame-map {
+                min-height: 210px;
+                border: none;
+                margin: 0;
+                padding: 0;
+                /*-webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.4);
+                        -moz-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.4);
+                        box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.4);
+                        border-radius: 1px 1px 1px 1px;
+                        -moz-border-radius: 1px 1px 1px 1px;
+                        -webkit-border-radius: 1px 1px 1px 1px;
+                        border: 3px solid #fff;*/
+                border: 1px solid silver;
+            }
+
+            .table-bordered > tbody > tr > td {
+                border: 1px solid #bfbfbf;
+            }
+
+            .table-striped > tbody > tr:nth-of-type(odd) {
+                background-color: #f3f3f3;
+            }
+        </style>
+    </div>
+
+    <div class="panel-footer">
+        <div class="pull-left">
+            <a href="@Url.Action("List", "Tour",new {reserveid=Model.ReserveId})" class="btn btn-default btn-md">لیست تورها</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+@section Menu{
+    @{Html.RenderPartial("_TourManagementSideBarMenu");}
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/datePicker")
+    @Scripts.Render("~/bundles/seatreserve")
+    @Scripts.Render("~/bundles/tooltipjs")
+}

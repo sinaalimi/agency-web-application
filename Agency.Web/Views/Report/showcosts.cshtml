@@ -1,0 +1,108 @@
+﻿@using System.Runtime.CompilerServices
+@using System.Web.Optimization
+@using Agency.Common.HtmlHelpers
+@using Agency.ViewModel.Report
+@model Agency.ViewModel.Report.OfficePersonListViewModel
+
+<div class="panel panel-default">
+<div class="panel-body">
+    <div class="tab-content" style="height: auto; overflow-y: scroll; width: auto; overflow-x: scroll">
+        <div class="row col-md-11" style="margin-top: 15px; margin-right: 10px;">
+            <table class="table table-striped" style="border: 3px solid #ecf0f1; text-align: center;" id="FormContainer">
+                <tr style="background-color: #dff0d8;">
+
+                    <td class="col-md-1">نام تور</td>
+                    <td class="col-md-1">نام دفتر</td>
+                    <td class="col-md-1">نام </td>
+                    <td class="col-md-1">نام خانوادگی </td>
+                    <td class="col-md-1">نام سرپرست </td>
+                    <td class="col-md-1">نسبت</td>
+                    <td class="col-md-1">شماره شناسنامه</td>
+                    <td class="col-md-1">کدملی</td>
+                    <td class="col-md-1">تاریخ تولد</td>
+                    <td class="col-md-1">محل تولد</td>
+                    <td class="col-md-1">آدرس</td>
+                    <td class="col-md-1">موبایل</td>
+                    <td class="col-md-1">تلفن</td>
+                    <td class="col-md-1">هزینه پایه</td>
+                    <td class="col-md-1">بیمه</td>
+                    <td class="col-md-1">تخت دونفره</td>
+                    <td class="col-md-1">هزینه کل</td>
+                    <td class="col-md-1">سهم آژانس</td>
+
+
+
+                </tr>
+                @foreach (var item in Model.OfficePersonList)
+                {
+                    <tr>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.TourName</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.UserName</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.Name</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.LastName</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.ParentName</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.Relation</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.IdCode</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.NationalCode</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.BirthDate</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.BirthPlace</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.Address</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.Mobile</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.Tel</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.BaseCost</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.Insurance</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.COupleBedCost</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.TotalCost</td>
+                        <td class="col-md-2" style="padding-right: 25px; background-color: #d9edf7;">@item.agencyshare</td>
+                    </tr>
+                }
+
+
+            </table>
+            <div class="col-md-4" style="float: right; border: 1px solid #c0f0c1; border-radius: 3px; background-color: #f7fff7;">
+                <div class="col-md-12" style="padding: 15px; height: 50px; margin-left: 20px;">
+                    <span>مجموع کل :</span>
+                    <span style="float: left;">@Model.OfficePersonList[Model.OfficePersonList.Count - 1].SumCost</span>
+
+                </div>
+
+
+            </div>
+            <div class="col-md-4" style="float: right; border: 1px solid #c0f0c1; border-radius: 3px; background-color: #f7fff7;">
+                <div class="col-md-12" style="padding: 15px; height: 50px; margin-left: 20px;">
+                    <span>سهم مجموع آژانس :</span>
+                    <span style="float: left;">@Model.OfficePersonList[Model.OfficePersonList.Count - 1].TotalAgencySHare</span>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    <div class="panel-footer">
+        <div class="pull-left">
+            <a href="@Url.Action("ExportCosts", "Report", new {id = Model.OfficePersonList[0].TourId})" type="button" autocomplete="off" data-loading-text="در حال پرینت" class="btn btn-success btn-md  ">
+                پرینت
+            </a>
+            <a href="@Url.Action("List", "Report")" class="btn btn-default btn-md">انصراف</a>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+
+</div>
+    </div>
+
+@section Menu{
+    @{Html.RenderPartial("_ReportManagementSideBar");}
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/datePicker")
+    <script>
+        $(function() {
+            $('.select').select2({});
+        });
+    </script>
+}

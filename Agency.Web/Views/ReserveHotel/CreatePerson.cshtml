@@ -1,0 +1,90 @@
+﻿@using System.Web.Optimization
+@using Agency.Common.HtmlHelpers
+@model Agency.ViewModel.ReserveHotel.CreatePersonViewModel
+@{
+    ViewBag.Title = "مشخصات" ;
+}
+@Html.HiddenFor(p=>p.RoomHotelId);
+
+@using (Html.BeginForm("createPerson", "ReserveHotel", FormMethod.Post, new { role = "form", @class = "form-horizontal", autocomplete = "off", id = "CreatePersonForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+            @*<hr class="margin-bottom-5 margin-top-5" />*@
+            <div class="row" style="margin-top: 15px;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(p => p.FName, new { @class = "control-label col-md-3" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(p => p.FName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(p => p.FName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(p => p.LName, new { @class = "control-label col-md-3" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(p => p.LName, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(p => p.LName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(p => p.Mobile, new { @class = "control-label col-md-3" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(p => p.Mobile, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(p => p.Mobile, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(p => p.Email, new { @class = "control-label col-md-3" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(p => p.Email, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(p => p.Email, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+                <button type="button" autocomplete="off" onclick="AjaxForm.CustomSubmit(this, 'CreatePersonForm')" data-loading-text="در حال ارسال اطلاعات" class="btn btn-success btn-md">
+                    ثبت مشخصات
+                </button>
+                <a href="@Url.Action("Index","Room")" class="btn btn-default btn-md">انصراف</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+
+    </div>
+}
+
+@section Menu{
+    @{Html.RenderPartial("_RoomManagmentSideBarMenu");}
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/datePicker")*@
+}
+
+
+
+

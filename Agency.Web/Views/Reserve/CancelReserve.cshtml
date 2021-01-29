@@ -1,0 +1,141 @@
+﻿@using System.Web.Optimization
+@using Agency.Common.Extentions
+@using Agency.DomainClasses.Entities.Vehicle
+@using Agency.Utilities
+@model Agency.ViewModel.Reserve.CancelReserveViewModel
+@using Auth = Agency.ServiceLayer.Security.AssignableToRolePermissions
+@{
+    ViewBag.Title = "CancelReserve";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-body">
+           
+           @if (Model.CancelAllFilePath.HasValue())
+           {
+               <div style="margin-right: 5px; margin-bottom: 10px;">
+                   <a class="btn btn-primary btn-md" href="@Url.Action("DownloadCancelFile", new {filename = Model.CancelAllFilePath})" role="button"><b><i class="fa fa-remove"></i></b>دانلود فایل کنسلی کل</a>
+               </div>
+           }
+           else
+           {
+               <div style="margin-right:5px; margin-bottom:10px;">
+                   <a class="btn btn-primary btn-md" href="@Url.Action("CancelAllNoAjax", new {reserveId = Model.Persons[0].ReserveId})" role="button"><b><i class="fa fa-remove"></i></b>کنسل کل رزرو</a>
+               </div>
+           }
+            <div class="row" style="height: 50px;" id="CustomerGroupList">
+                @{ 
+                    bool OnlyParentExist=false;
+                    if (Model.Persons.Count(p => !p.IsCanceled) < 2)
+                    {
+                        OnlyParentExist = true;
+                    }
+                }
+                @foreach (var item in Model.Persons)
+                {
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-body">
+                                @if (item.Id == item.ParentId)
+                                {
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="alert alert-info help-alert margin-bottom-0"
+                                                     style="background-color: #92a3a3; margin-bottom: 15px;">
+                                                    <img alt="tip" src="/Content/Images/lightbulb.png">در صورتی که گزینه کنسل کردن برای سرپرست وجود نداشت،باید از کنسل کل رزرو استفاده کنید<br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else if (item.IsCanceled)
+                                {
+                                    <div class="panel-heading">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="alert alert-info help-alert margin-bottom-0"
+                                                     style="background-color: #92a3a3; margin-bottom: 15px;">
+                                                    <img alt="tip" src="/Content/Images/lightbulb.png">رزرو برای این شخص کنسل شده است<br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+
+                                <div class="row" style="height: 50px; margin-right: 5px;">
+                                    <div class="col-md-10">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label class="text-muted"> نام :</label>
+                                                <small>@item.Name</small>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label class="text-muted">نام خانوادگی :</label>
+                                                <small>@item.LastName</small>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label class="text-muted" for="group">شماره شناسنامه :</label>
+                                                <small>@item.IdentityCode</small>
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                <label class="text-muted" for="group">کد ملی :</label>
+                                                <small>@item.NationalCode</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-footer">
+                                <div class="pull-left">
+                                    @if (!item.IsCanceled)
+                                    {
+                                        if (item.Id == Model.Persons[0].Id)
+                                        {
+                                            if (!OnlyParentExist)
+                                            {
+                                                <a class="btn btn-warning btn-sm" data-ajax="true" data-ajax-mode="replace" data-ajax-method="GET" data-ajax-success="onSuccessFormValidation(data, status, xhr,'editVehicleForm','modal')"
+                                                   data-ajax-update="#modal" data-ajax-url="@Url.Action("CancelAjax", new {reserveId = item.ReserveId, personId = item.Id})" role="button"><b><i class="fa fa-remove"></i></b>کنسل کردن</a>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <a class="btn btn-warning btn-sm" data-ajax="true" data-ajax-mode="replace" data-ajax-method="GET" data-ajax-success="onSuccessFormValidation(data, status, xhr,'editVehicleForm','modal')"
+                                               data-ajax-update="#modal" data-ajax-url="@Url.Action("CancelAjax", new {reserveId = item.ReserveId, personId = item.Id})" role="button"><b><i class="fa fa-remove"></i></b>کنسل کردن</a>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        if (item.CancelFilePath.HasValue())
+                                        {
+                                            <a class="btn btn-info btn-sm" href="@Url.Action("DownloadCancelFile",new {filename=item.CancelFilePath})"><b><i class="fa fa-download"></i></b>دانلود فایل کنسلی</a>
+                                        }
+                                    }
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+</div>
+
+@section Menu{
+    @{Html.RenderPartial("_ReserveManagmentSideBar");}
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

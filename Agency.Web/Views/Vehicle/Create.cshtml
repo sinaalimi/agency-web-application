@@ -1,0 +1,61 @@
+﻿@using System.Web.Optimization
+@using Agency.Common.HtmlHelpers
+@model Agency.ViewModel.Vehicle.CreateVehicleViewModel
+@{
+    ViewBag.Title = "تعریف وسیله نقلیه";
+}
+
+@using (Html.BeginForm("Create", "Vehicle", FormMethod.Post, new { role = "form", @class = "form-horizontal", autocomplete = "off", id = "CreateVehicleForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+            <div class="panel-body">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(p => p.Name, new { @class = "control-label col-md-3" })
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(p => p.Name, new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(p => p.Name, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                @Html.LabelFor(p => p.Capacity, new {@class = "control-label col-md-3"})
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(p => p.Capacity, new {@class = "form-control numbertxt"})
+                                    @Html.ValidationMessageFor(p => p.Capacity, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <div class="pull-left">
+                    <button type="button" autocomplete="off" onclick="AjaxForm.CustomSubmit(this, 'CreateVehicleForm')" data-loading-text="در حال ارسال اطلاعات" class="btn btn-success btn-md">
+                        ثبت وسیله نقلیه
+                    </button>
+                    <a href="@Url.Action("List","Vehicle")" class="btn btn-default btn-md">انصراف</a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+
+    </div>
+                            }
+
+@section Menu{
+    @{Html.RenderPartial("_VehicleManagmentSideBarMenu");}
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

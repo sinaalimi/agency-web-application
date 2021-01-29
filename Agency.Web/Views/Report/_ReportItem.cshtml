@@ -1,0 +1,123 @@
+﻿@using Agency.Utilities
+@model Agency.ViewModel.Tour.ShowTourViewModel
+<div class="col-md-12" id="tour-@Model.Id">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row" style="height: 100px;">
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted"> عنوان تور :</label>
+                            <small>@Model.Title</small>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="text-muted">ظرفیت تور :</label>
+                            <small>@Model.Capacity</small>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">مبدا :</label>
+                            <small>@Model.SourceCity</small>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">مقصد :</label>
+                            <small>@Model.DesCity</small>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted">تاریخ اعزام :</label>
+                            <small>@Model.StartTime.ToPersianString(PersianDateTimeFormat.Date)</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted">تاریخ برگشت :</label>
+                            <small>@Model.EndTime.ToPersianString(PersianDateTimeFormat.Date)</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted">پایان مهلت ثبت نام :</label>
+                            <small>@Model.FinishRegister.ToPersianString(PersianDateTimeFormat.Date)</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted">نام سرپرست :</label>
+                            <small>@Model.SupervisorName</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted">وسیله نقلیه :</label>
+                            @{
+                                int i = 0;
+                                foreach (var item in Model.Vehicles)
+                                {
+                                    i++;
+                                    <small>@item.Name</small>
+                                    if (i < Model.Vehicles.Count)
+                                    {
+                                        <small>,</small>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted">هتل ها :</label>
+                            @{
+                                int ii = 0;
+                                foreach (var item in Model.Hotels)
+                                {
+                                    ii++;
+                                    <small>@item.Name</small>
+                                    if (ii < Model.Hotels.Count)
+                                    {
+                                        <small>,</small>
+                                    }
+
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                @if (Model.ImageSrc != null)
+                {
+                    <div class="col-md-2" style="height: 140px;">
+                        <img src="/Content/TourPhotoes/@Model.ImageSrc" style="height: 100%; width: 100%;" />
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+                <a href="@Url.Action("showInsurance", "Report", new {id = Model.Id})"style="background-color:  #0086b3" class="btn btn-sm btn-primary" type="button">
+                    <i class="fa fa-edit"></i>
+                    گزارش بیمه ها
+                </a>
+
+                <a href="@Url.Action("showcosts", "Report", new {id = Model.Id})"style="background-color:  #0086b3" class="btn btn-sm btn-primary" type="button">
+                    <i class="fa fa-edit"></i>
+                    گزارش هزینه ها
+                </a>
+                <a href="@Url.Action("showreport", "Report", new {id = Model.Id})"style="background-color:  #0086b3" class="btn btn-sm btn-primary" type="button">
+                    <i class="fa fa-edit"></i>
+                    گزارش کلی تور
+                </a>
+                <a href="@Url.Action("showSeats", "Report", new {id = Model.Id})"style="background-color: #0086b3" class="btn btn-sm btn-primary" type="button">
+                    <i class="fa fa-edit"></i>
+                    گزارش صندلی های تور
+                </a>
+                <a href="@Url.Action("CanceledReserves", "Report", new {id = Model.Id})" style="background-color:  #0086b3" class="btn btn-sm btn-primary" type="button">
+                    <i class="fa fa-edit"></i>
+                    گزارش رزرو های کنسل شده
+                </a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,52 @@
+﻿@using System.Web.Optimization
+@using Agency.DomainClasses.Entities.Vehicle
+@model Agency.ViewModel.Vehicle.ShowVehicleViewModel
+
+
+<div class="col-md-12" id="vehicle-@Model.Id">
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+            <div class="row" style="height: 50px;">
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">نام :</label>
+                            <small>@Model.Name</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">ظرفیت :</label>
+                            <small>@Model.Capacity</small>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+                <a href="@Url.Action("Edit", "Vehicle",new { id = Model.Id })" class="btn btn-sm btn-info" type="button">
+                    <i class="fa fa-align-justify"></i>
+                    ویرایش
+                </a>
+
+                <a href="@Url.Action("Format", "Vehicle", new {id = Model.Id})" class="btn btn-sm btn-info" type="button">
+                    <i class="fa fa-align-justify"></i>
+                    چیدمان
+                </a>
+                <button class="btn-sm btn btn-danger"
+                        type="button" data-delete-url="@Url.Action("Delete", "Vehicle")" data-removal-element="#vehicle-@Model.Id" id="remove-@Model.Id">
+                    <i class="fa fa-trash-o"></i>
+                    حذف
+                </button>
+                @*}*@
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

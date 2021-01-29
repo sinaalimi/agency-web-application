@@ -1,0 +1,7 @@
+﻿@model  Agency.ViewModel.Vehicle.VehicleListViewModel
+
+@foreach (var vehicle in Model.Vehicles)
+{
+    @Html.Partial("_vehicleItem", vehicle)
+}
+

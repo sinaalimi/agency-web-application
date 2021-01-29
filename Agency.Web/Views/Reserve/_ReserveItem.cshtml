@@ -1,0 +1,88 @@
+﻿@using Agency.Common.Extentions
+@using Agency.DomainClasses.Entities.Vehicle
+@using Agency.Utilities
+@model Agency.ViewModel.Reserve.ShowReserveViewModel
+@using Auth = Agency.ServiceLayer.Security.AssignableToRolePermissions
+
+
+<div class="col-md-12" id="reserve-@Model.Id">
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+            <div class="row" style="height: 50px;">
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted">نام تور :</label>
+                            <small>@Model.Tour.Title</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">ماشین :</label>
+                            <small>@Model.Vehicle.Name</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">هتل :</label>
+                            <small>@Model.Hotel.Name</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">نام سرپرست :</label>
+                            <small>@Model.ParentName</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">تعداد افراد :</label>
+                            <small>@Model.PersonCount</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">مبدا :</label>
+                            <small>@Model.Source</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">مقصد :</label>
+                            <small>@Model.Destination</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">تاریخ رزرو</label>
+                            <small>@Model.ReserveTime.ToPersianString(PersianDateTimeFormat.Date)</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">کد رهگیری</label>
+                            <small>@Model.CodeRahgiri</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">مجموع هزینه</label>
+                            <small>@Model.TotalCost</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+                @if (!Model.IsCanseled)
+                {
+                     if (User.IsInRole(Auth.CanEditReserve) && User.IsInRole("مدیر"))
+                     {
+                         <a href="@Url.Action("Edit", "Reserve", new {id = Model.Id})" class="btn btn-sm btn-primary" type="button">
+                             <i class="fa fa-align-justify"></i>
+                             ویرایش اطلاعات افراد
+                         </a>
+                    }
+                    <a href="@Url.Action("Cancel", "Reserve", new {id = Model.Id})" class="btn btn-sm btn-warning" type="button">
+                        <i class="fa fa-align-justify"></i>
+                        کنسل کردن
+                    </a>
+                }
+                else
+                {
+                    <a href="@Url.Action("Cancel", "Reserve", new {id = Model.Id})" class="btn btn-sm btn-warning" type="button">
+                        <i class="fa fa-align-justify"></i>
+                        دانلود فایل های کنسلی
+                    </a>
+                }
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+</div>
+

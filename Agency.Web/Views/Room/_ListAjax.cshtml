@@ -1,0 +1,8 @@
+﻿@model Agency.ViewModel.Room.RoomListViewModel
+
+@foreach (var room in Model.Rooms)
+{
+    @Html.Partial("_roomItem", room)
+}
+
+

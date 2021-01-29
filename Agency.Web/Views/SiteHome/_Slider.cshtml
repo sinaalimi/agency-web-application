@@ -1,0 +1,76 @@
+﻿@using Agency.Common.Extentions
+@model Agency.ViewModel.Slider.SliderListViewModel
+
+<div id="banner" class="carousel slide carousel-fade" data-ride="carousel" data-pause="false">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+        @if (Model.Slides.Count == 0)
+        {
+            <div class="item active" style="background-image: url(/Content/Site/img/banner/2.jpg);">
+                <div class="caption-info">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-8 col-md-offset-2">
+                                <div class="caption-info-inner text-center">
+                                    <h1 class="animated fadeInDown">اسلاید اول</h1>
+                                    <p class="animated fadeInUp">
+                                        آژانس پر قو
+                                    </p>
+                                    @*<a href="#packages" class="animated fadeInUp btn btn-primary page-scroll">Read More</a>*@
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="item active" style="background-image: url(/Content/SliderPhotoes//@Model.Slides[0].PicSrc);">
+                <div class="caption-info">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-8 col-md-offset-2">
+                                <div class="caption-info-inner text-center">
+                                    <h1 class="animated fadeInDown">@Model.Slides[0].Title</h1>
+                                    <p class="animated fadeInUp">@Model.Slides[0].Describ</p>
+                                    @if (Model.Slides[0].Link.HasValue())
+                                    {
+                                        <a href="@Model.Slides[0].Link" class="animated fadeInUp btn btn-primary page-scroll" style="margin-top: 20px;">@Model.Slides[0].ButtonTitle</a>
+                                    }
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    @for (int i = 1; i < Model.Slides.Count; i++)
+    {
+        <div class="item" style="background-image: url(/Content/SliderPhotoes//@Model.Slides[i].PicSrc);">
+            <div class="caption-info">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-8 col-md-offset-2">
+                            <div class="caption-info-inner text-center">
+                                <h1 class="animated zoomIn">@Model.Slides[i].Title</h1>
+                                <p class="animated zoomIn">@Model.Slides[i].Describ</p>
+                                @if (Model.Slides[i].Link.HasValue())
+                                {
+                                    <a href="@Model.Slides[i].Link" class="animated zoomIn btn btn-primary page-scroll" style="margin-top: 20px;">@Model.Slides[i].ButtonTitle</a>
+                                }
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    </div><!--end carousel-inner-->
+    <!-- Controls -->
+    <a class="control left" href="#banner" data-slide="prev"><i class="fa fa-long-arrow-left"></i></a>
+    <a class="right control" href="#banner" data-slide="next"><i class="fa fa-long-arrow-right"></i></a>
+</div>

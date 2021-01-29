@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Agency.ServiceLayer.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Agency_ServiceLayer_SmsZone_SMSZone" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://new.smszone.ir/SMSZone.asmx</Value>
+    </Setting>
+    <Setting Name="Insurance_ServiceLayer_SmsZone_SMSZone" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://new.smszone.ir/SMSZone.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

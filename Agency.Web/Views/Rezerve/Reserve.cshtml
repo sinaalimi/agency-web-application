@@ -1,0 +1,227 @@
+﻿@*@using System.Runtime.CompilerServices
+@using System.Web.Optimization
+@using Agency.Common.HtmlHelpers
+@model Agency.ViewModel.Tour.CreateTourViewModel*@
+
+@using (Html.BeginForm("Create", "Tour", FormMethod.Post, new { role = "form", @class = "form-horizontal", autocomplete = "off", id = "CreateTourForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            @*@if (Model.GroupSelectListItems.Count == 0)
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            @{
+                                var x = "برای ایجاد مشتری،وجود حداقل یک گروه مشتری الزامی میباشد.";
+                                x += "<br>";
+                                x += "لطفا ابتدا از طریق لینک زیر یک گروه مشتری ایجاد کنید.";
+                            }
+                            @Html.HelpAlert(Url.Content("~/Content/Images/lightbulb.png"),
+                                x)
+                            <a class="btn bg-primary btn-md" style="margin-top: 10px; margin-bottom: 10px;" data-ajax="true" data-ajax-mode="replace" d data-ajax-method="GET" data-ajax-success="onSuccessFormValidation(data, status, xhr,'createCustomerGroupForm','modal')"
+                               data-ajax-update="#modal" data-ajax-url="@Url.Action("CreateAndReload","CustomerGroup")" role="button"><i class="fa fa-plus"></i>تعریف گروه مشتری</a>
+                        </div>
+                    </div>
+                                }*@
+        </div>
+
+        @*@if (Model.Hotels != null && Model.Hotels.Count > 0)
+            {*@
+        <div class="panel-body">
+            @*<hr class="margin-bottom-5 margin-top-5" />*@
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#baseInfo" data-toggle="tab">اطلاعات پایه</a>
+                </li>
+                <li>
+                    <a href="#files" data-toggle="tab">فایل های ضمیمه</a>
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane active" id="baseInfo">
+                    <div class="row" style="margin-top: 15px;">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(p => p.IsurancePrice, new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(p => p.IsurancePrice, new { @class = "form-control numbertxt" })
+                                        @Html.ValidationMessageFor(p => p.IsurancePrice, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(p => p.co
+                               , new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(p => p.Cost, new { @class = "form-control numbertxt" })
+                                        @Html.ValidationMessageFor(p => p.Cost, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(p => p.AgencyShare, new { @class = "control-label col-md-3" })
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(p => p.AgencyShare, new { @class = "form-control numbertxt" })
+                                        @Html.ValidationMessageFor(p => p.AgencyShare, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <h3></h3>
+                            <button id="BtAddVehicle" class="btn btn-info btn-md" style="font-size: 20px; font-weight: bold" type="button">+</button>
+                            <label>افزودن وسیله نقلیه</label>
+                        </div>
+                        <table class="table table-striped" id="FormContainer">
+                            <tr>
+                                <td class="col-md-2">نوع</td>
+                                <td class="col-md-3">تعداد</td>
+                                <td class="col-md-1" id="WarningItemDelete">&nbsp;</td>
+                            </tr>
+                            <tr id="vehicleitem">
+                                <td class="col-md-3">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(model => model.VehicleIds, new { @class = "control-label col-md-2" })*@
+                                        <div class="col-md-6">
+                                            @Html.DropDownListFor(p => p.VehicleList[0].VehicleId, Model.VehicleList[0].VehicleListItems, "انتخاب وسیله", new { @class = "form-control DropDownVehicleChange" })
+                                            @Html.ValidationMessageFor(model => model.VehicleList[0].VehicleId, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="col-md-1">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(model => Model.WarningItemsList[index].RemainingDays, htmlAttributes: new {@class = "control-label col-md-2"})*@
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => Model.VehicleList[0].Count, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => Model.VehicleList[0].Count, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            @for (int index = 1; index < Model.VehicleList.Count; index++)
+                            {
+                                var indexname = "vehicleitem-" + @index.ToString();
+                                <tr id=@indexname>
+                                    <td class="col-md-3">
+                                        <div class="form-group">
+                                            @*@Html.LabelFor(model => model.VehicleIds, new { @class = "control-label col-md-2" })*@
+                                            <div class="col-md-6">
+                                                @Html.DropDownListFor(p => p.VehicleList[index].VehicleId, Model.VehicleList[index].VehicleListItems, "انتخاب وسیله", new { @class = "form-control DropDownVehicleChange" })
+                                                @Html.ValidationMessageFor(model => model.VehicleList[index].VehicleId, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-1">
+                                        <div class="form-group">
+                                            @*@Html.LabelFor(model => Model.WarningItemsList[index].RemainingDays, htmlAttributes: new {@class = "control-label col-md-2"})*@
+                                            <div class="col-md-10">
+                                                @Html.EditorFor(model => Model.VehicleList[index].Count, new { htmlAttributes = new { @class = "form-control" } })
+                                                @Html.ValidationMessageFor(model => Model.VehicleList[index].Count, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="col-md-1"><button class="removeBtn btn btn-sm btn-danger" type="button">x</button></td>
+                                </tr>
+                            }
+                        </table>
+
+
+
+
+
+                    </div>
+                </div>
+                <div class="tab-pane" id="files">
+                    <div class="col-md-2">
+                        <h3></h3>
+                        <button id="BtAddOption" class="btn btn-info btn-md" style="font-size: 20px; font-weight: bold" type="button">+</button>
+                        <label>افزودن آپشن</label>
+                    </div>
+                    <table class="table table-striped" id="OptionTable">
+                        <tr>
+                            <td class="col-md-2">عنوان</td>
+                            <td class="col-md-3">هزینه</td>
+                            <td class="col-md-1" id="OptionItemDeleteColumn">&nbsp;</td>
+                        </tr>
+                        <tr id="optionitem-0" hidden>
+                            <td class="col-md-3">
+                                <div class="form-group">
+                                    @*@Html.LabelFor(model => model.VehicleIds, new { @class = "control-label col-md-2" })*@
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => Model.OptionsList[0].Title, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => model.OptionsList[0].Title, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="col-md-1">
+                                <div class="form-group">
+                                    @*@Html.LabelFor(model => Model.WarningItemsList[index].RemainingDays, htmlAttributes: new {@class = "control-label col-md-2"})*@
+                                    <div class="col-md-10">
+                                        @Html.EditorFor(model => Model.OptionsList[0].Cost, new { htmlAttributes = new { @class = "form-control" } })
+                                        @Html.ValidationMessageFor(model => Model.OptionsList[0].Cost, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="col-md-1"><button class="removeBtnOption btn btn-sm btn-danger" type="button">x</button></td>
+                        </tr>
+                        @for (int index = 1; index < Model.OptionsList.Count; index++)
+                {
+                    var indexname = "optionitem-" + @index.ToString();
+                            <tr id=@indexname>
+                                <td class="col-md-3">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(model => model.VehicleIds, new { @class = "control-label col-md-2" })*@
+                                        <div class="col-md-6">
+                                            @Html.EditorFor(model => Model.OptionsList[index].Title, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => model.OptionsList[index].Title, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="col-md-1">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(model => Model.WarningItemsList[index].RemainingDays, htmlAttributes: new {@class = "control-label col-md-2"})*@
+                                        <div class="col-md-10">
+                                            @Html.EditorFor(model => Model.OptionsList[index].Cost, new { htmlAttributes = new { @class = "form-control" } })
+                                            @Html.ValidationMessageFor(model => Model.OptionsList[index].Cost, "", new { @class = "text-danger" })
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="col-md-1"><button class="removeBtn btn btn-sm btn-danger" type="button">x</button></td>
+                            </tr>
+                        }
+                    </table>
+
+                </div>
+            </div>
+
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+                <button type="button" autocomplete="off" onclick="AjaxForm.CustomSubmit(this, 'CreateTourForm')" data-loading-text="در حال ارسال اطلاعات" class="btn btn-success btn-md">
+                    ثبت تور
+                </button>
+                <a href="@Url.Action("List", "Customer")" class="btn btn-default btn-md">انصراف</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+}
+
+@section Menu{
+    @{Html.RenderPartial("_TourManagementSideBarMenu");}
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/datePicker")
+    <script>
+        $(function () {
+            $('.select').select2({});
+        });
+    </script>
+}

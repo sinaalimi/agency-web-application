@@ -1,0 +1,357 @@
+﻿@using System.Diagnostics.Eventing.Reader
+@using System.Web.Optimization
+@using Agency.AutoMapper
+@using Agency.DomainClasses.Entities.Reserve
+@model Agency.ViewModel.Reserve.EditReserveViewModel
+
+@using (Html.BeginForm("Edit", "Reserve", FormMethod.Post, new { role = "form", @class = "form-horizontal", autocomplete = "off", id = "CreateTourForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(p => Model.TourId)
+    @Html.HiddenFor(p => Model.ParentViewModel.Id)
+    @Html.HiddenFor(p=>Model.Id)
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+
+        <div class="panel-body">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#baseInfo" data-toggle="tab">اطلاعات افراد</a>
+                </li>
+            </ul>
+        <div class="tab-content">
+        <div class="tab-pane active" id="baseInfo">
+        <div class="row" style="margin-top: 15px;">
+
+        <div id="persondiv">
+        <div class="row" style="margin-top: 5px;">
+            <div class="col-md-3 col-md-offset-1">
+                <button aria-controls="show-search" aria-expanded="false" class="btn btn-default  btn-block" data-target="#ShowParent" data-toggle="collapse" type="button">
+                    <i class="fa fa-user"></i>
+                    اطلاعات سرپرست
+                </button>
+            </div>
+        </div>
+        <div class="row collapse" style="margin-top: 25px;" id="ShowParent">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.ParentViewModel.Name, new {@class = "control-label col-md-3"})
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(p => p.ParentViewModel.Name, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(p => p.ParentViewModel.Name, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.ParentViewModel.LastName, new {@class = "control-label col-md-3"})
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(p => p.ParentViewModel.LastName, new {@class = "form-control "})
+                            @Html.ValidationMessageFor(p => p.ParentViewModel.LastName, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.ParentViewModel.NationalCode, new {@class = "control-label col-md-3"})
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(p => p.ParentViewModel.NationalCode, new {@class = "form-control numbertxt "})
+                            @Html.ValidationMessageFor(p => p.ParentViewModel.NationalCode, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.ParentViewModel.IdentityCode, new {@class = "control-label col-md-3"})
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(p => p.ParentViewModel.IdentityCode, new {@class = "form-control numbertxt"})
+                            @Html.ValidationMessageFor(p => p.ParentViewModel.IdentityCode, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.ParentViewModel.BirthDay, new {@class = "control-label col-md-3"})
+                        <div class="col-md-6">
+                            @Html.EditorFor(p => p.ParentViewModel.BirthDay, new {@class = "form-control "})
+                            @Html.ValidationMessageFor(p => p.ParentViewModel.BirthDay, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.ParentViewModel.BirthPlace, new {@class = "control-label col-md-3"})
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(p => p.ParentViewModel.BirthPlace, new {@class = "form-control "})
+                            @Html.ValidationMessageFor(p => p.ParentViewModel.BirthPlace, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.ParentViewModel.Mobile, new {@class = "control-label col-md-3"})
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(p => p.ParentViewModel.Mobile, new {@class = "form-control numbertxt"})
+                            @Html.ValidationMessageFor(p => p.ParentViewModel.Mobile, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.ParentViewModel.Job, new {@class = "control-label col-md-3"})
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(p => p.ParentViewModel.Job, new {@class = "form-control "})
+                            @Html.ValidationMessageFor(p => p.ParentViewModel.Job, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.ParentViewModel.PhoneNumber, new {@class = "control-label col-md-3"})
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(p => p.ParentViewModel.PhoneNumber, new {@class = "form-control numbertxt "})
+                            @Html.ValidationMessageFor(p => p.ParentViewModel.PhoneNumber, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ParentViewModel.Gender, htmlAttributes: new {@class = "control-label col-md-3"})
+                        <div class="col-md-6">
+                            مرد
+                            @Html.RadioButtonFor(p => p.ParentViewModel.Gender, true, new {@class = "", @checked = "checked"})
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            زن
+                            @Html.RadioButtonFor(p => p.ParentViewModel.Gender, false, new {@class = ""})
+                            @Html.ValidationMessageFor(model => model.ParentViewModel.Gender, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.ParentViewModel.Address, new { @class = "control-label col-md-3" })
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(p => p.ParentViewModel.Address, new { @class = "form-control numbertxt " })
+                            @Html.ValidationMessageFor(p => p.ParentViewModel.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        @{
+            for (int i = 0; i < Model.ListEditPersonViewModel.Count; i++)
+            {
+                bool hidden = false;
+                if (i == 0)
+                {
+                    hidden = true;
+                }
+                <div id="@( "personitem-" + @i )" class="editpersonclass" style="@(hidden ? "display: none;" : "")">
+
+                    <div class="row" style="margin-top: 5px;">
+                        @if (i == 0)
+                        {
+                            <button class="removeBtnPerson btn btn-sm btn-danger" type="button">x</button>
+                        }
+                        <div class="col-md-3 col-md-offset-1">
+                            @{
+                                var g = "#show-search" + @i;
+                                var gg = "show-search" + @i;
+                            }
+                            <button id="buttonpersonitem" aria-controls="show-search" aria-expanded="false" class="btn btn-warning  btn-block" data-target=@g data-toggle="collapse" type="button">
+                                <i class="fa fa-user"></i>
+                                اطلاعات شخص @(i)
+                            </button>
+                        </div>
+                        @if (i != 0)
+                        {
+                            <div style="margin-top: 3px;">
+                            </div>
+                        }
+                    </div>
+                    <div class="row collapse" style="margin-top: 25px;" id=@gg>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(p => p.ListEditPersonViewModel[i].Name, new {@class = "control-label col-md-3"})
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(p => p.ListEditPersonViewModel[i].Name, new {@class = "form-control"})
+                                        @Html.ValidationMessageFor(p => p.ListPersonViewModel[i].Name, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(p => p.ListEditPersonViewModel[i].LastName, new {@class = "control-label col-md-3"})
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(p => p.ListEditPersonViewModel[i].LastName, new {@class = "form-control "})
+                                        @Html.ValidationMessageFor(p => p.ListEditPersonViewModel[i].LastName, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(p => p.ListEditPersonViewModel[i].NationalCode, new {@class = "control-label col-md-3"})
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(p => p.ListEditPersonViewModel[i].NationalCode, new {@class = "form-control numbertxt "})
+                                        @Html.ValidationMessageFor(p => p.ListEditPersonViewModel[i].NationalCode, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(p => p.ListEditPersonViewModel[i].IdentityCode, new {@class = "control-label col-md-3"})
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(p => p.ListEditPersonViewModel[i].IdentityCode, new {@class = "form-control numbertxt"})
+                                        @Html.ValidationMessageFor(p => p.ListEditPersonViewModel[i].IdentityCode, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(p => p.ListEditPersonViewModel[i].BirthDay, new {@class = "control-label col-md-3"})
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(p => p.ListEditPersonViewModel[i].BirthDay, new {@class = "form-control "})
+                                        @Html.ValidationMessageFor(p => p.ListEditPersonViewModel[i].BirthDay, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(p => p.ListEditPersonViewModel[i].BirthPlace, new {@class = "control-label col-md-3"})
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(p => p.ListEditPersonViewModel[i].BirthPlace, new {@class = "form-control "})
+                                        @Html.ValidationMessageFor(p => p.ListEditPersonViewModel[i].BirthPlace, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ListEditPersonViewModel[i].AgeRange, new {@class = "control-label col-md-3"})
+                                    <div class="col-md-6">
+                                        @Html.EditorFor(model => model.ListEditPersonViewModel[i].AgeRange, new {@class = "form-control"})
+                                        @Html.ValidationMessageFor(model => model.ListEditPersonViewModel[i].AgeRange, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ListEditPersonViewModel[i].Relation, new {@class = "control-label col-md-3"})
+                                    <div class="col-md-6">
+                                        @Html.TextBoxFor(model => model.ListEditPersonViewModel[i].Relation, new {@class = "form-control"})
+                                        @Html.ValidationMessageFor(model => model.ListEditPersonViewModel[i].Relation, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.ListEditPersonViewModel[i].Gender, htmlAttributes: new {@class = "control-label col-md-3 "})
+                                    <div class="col-md-6">
+                                        مرد
+                                        @Html.RadioButtonFor(p => p.ListEditPersonViewModel[i].Gender, "true", new {@class = "genderman"})
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                        زن
+                                        @Html.RadioButtonFor(p => p.ListEditPersonViewModel[i].Gender, "false", new {@class = "genderwoman"})
+                                        @Html.ValidationMessageFor(model => model.ListEditPersonViewModel[i].Gender, "", new {@class = "text-danger"})
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    @Html.HiddenFor(p => Model.ListEditPersonViewModel[i].Id)
+                    @Html.HiddenFor(p => p.ListEditPersonViewModel[i].ParentId)
+                </div>
+
+            }
+        }
+        </div>
+        </div>
+
+        </div>
+            <div class="tab-pane" id="hotel">
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.HotelId, new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(p => p.HotelId, Model.HotelList, "انتخاب هتل", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.HotelId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+
+                    @if (Model.ListEditPersonViewModel.Count == 1)
+                {
+                        <div class="col-md-3">
+                            <div class="input-group">
+                                <span class="input-group-addon" style="border-right: 0px;">
+                                    <input type="checkbox" name="CoupleBed" value="True" aria-label="...">
+                                </span>
+                                <label class="form-control" aria-label="...">تخت دو نفره</label>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="tab-pane" id="vehicle">
+                <div class="row" style="margin-top: 30px;">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.TourVehicleId, new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @Html.DropDownListFor(p => p.TourVehicleId, Model.VehicleList, "انتخاب ماشین", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.TourVehicleId, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        </div>
+    <div class="panel-footer">
+        <div class="pull-left">
+            <button type="button" autocomplete="off" onclick="AjaxForm.CustomSubmit(this, 'CreateTourForm')" data-loading-text="در حال ارسال اطلاعات" class="btn btn-success btn-md">
+                ویرایش
+            </button>
+            @if (Model.IsTemporary)
+            {
+                <a href="@Url.Action("ShowCost", "Cost", new {reserveid = Model.Id})" class="btn btn-default btn-md">پرداخت</a>
+            }
+        </div>
+        <div class="clearfix"></div>
+    </div>
+        </div>
+
+                                          }
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/datePicker")
+}

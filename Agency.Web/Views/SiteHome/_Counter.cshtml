@@ -1,0 +1,33 @@
+﻿@model Agency.ViewModel.Home.CounterViewModel
+
+<section class="count-section parallax" data-stellar-background-ratio="0.5" style="background-image: url(img/bg/counter-bg.jpg);">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <ul>
+                    <li>
+                        <i class="fa fa-heart-o"></i>
+                        <h2><span class=""> </span></h2>
+                        <h4>رضایت از مشتری</h4>
+                    </li>
+                    <li>
+                        <i class="fa fa-bed"></i>
+                        <h2><span class="counter">@Model.Hotels</span></h2>
+                        <h4>هتل ها</h4>
+                    </li>
+                    <li>
+                        <i class="fa fa-flag-checkered"></i>
+                        <h2><span class="counter">@Model.Destinations</span></h2>
+                        <h4>مقصد ها</h4>
+                    </li>
+                    <li>
+                        <i class="fa fa-ship"></i>
+                        <h2><span class="counter">@Model.DoneTours</span></h2>
+                        <h4>تور های انجام شده</h4>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

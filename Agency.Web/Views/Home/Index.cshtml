@@ -1,0 +1,23 @@
+﻿@using System.Web.Optimization
+@{
+    ViewBag.Title = "پنل مدیریتی";
+}
+@{Html.RenderAction("GetBenckMarks");}
+
+<hr />
+<div class="row">
+    <div class="col-md-4" id="TopScoreApplicants" data-load-url="" data-progress-div="progressOne">
+        <div id="progressOne" align="center" style="display: none">
+            <img src="@Url.Content("~/Content/images/loading.gif")" alt="loading..."/>
+        </div>
+    </div>
+    <div class="col-md-4" id="NewAddedApplicants" data-load-url="" data-progress-div="progressTwo">
+        <div id="progressTwo" align="center" style="display: none">
+            <img src="@Url.Content("~/Content/images/loading.gif")" alt="loading..."/>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/datePicker")
+}

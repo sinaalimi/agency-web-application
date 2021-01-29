@@ -1,0 +1,6 @@
+﻿@* GeneratePrettyNames: true*@
+@model  Agency.ViewModel.Slider.SliderListViewModel
+@foreach (var slide in Model.Slides)
+{
+    @Html.Partial("_SliderItem", slide)
+}

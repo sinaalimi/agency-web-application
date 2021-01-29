@@ -1,0 +1,6 @@
+﻿@model Agency.ViewModel.User.UserListViewModel
+@foreach (var user in Model.Users)
+{
+    @Html.Partial("_UserItem", user)
+}
+

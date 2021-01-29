@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{561D11DD-77BD-4977-9C6A-04DA7429A7AF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Agency.ViewModel</RootNamespace>
+    <AssemblyName>Agency.ViewModel</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PersianDateTime, Version=1.1.5082.36395, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PersianDateTime.1.1.5082.36395\lib\net40\PersianDateTime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account\LoginViewModel.cs" />
+    <Compile Include="Common\BaseRowVersion.cs" />
+    <Compile Include="Common\BaseSearchRequest.cs" />
+    <Compile Include="Common\BaseViewModel.cs" />
+    <Compile Include="Common\DeleteMessageViewModel.cs" />
+    <Compile Include="Common\SortDirectionMode.cs" />
+    <Compile Include="Cost\AdultCostViewModel.cs" />
+    <Compile Include="Cost\BabyCostViewModel.cs" />
+    <Compile Include="Cost\ChildCostViewModel.cs" />
+    <Compile Include="Cost\ShowCostViewModel.cs" />
+    <Compile Include="Home\BenchmarkViewModel.cs" />
+    <Compile Include="Hotel\CreateHotelViewModel.cs" />
+    <Compile Include="Hotel\EditHotelViewModel.cs" />
+    <Compile Include="Hotel\HotelDetailViewModel.cs" />
+    <Compile Include="Hotel\HotelListViewModel.cs" />
+    <Compile Include="Hotel\HotelSearchRequest.cs" />
+    <Compile Include="Hotel\ShowHotelViewModel.cs" />
+    <Compile Include="Hotel\SmallHotelListViewModel.cs" />
+    <Compile Include="Jarime\JarimeViewModel.cs" />
+    <Compile Include="Jarime\ListJarimeViewModel.cs" />
+    <Compile Include="Option\HotelOptionViewModel.cs" />
+    <Compile Include="Option\OptionViewModel.cs" />
+    <Compile Include="Person\CreateParentViewModel.cs" />
+    <Compile Include="Person\CreatePersonViewModel.cs" />
+    <Compile Include="Person\EditParentViewModel.cs" />
+    <Compile Include="Person\EditPersonViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\CancelledToursListViewModel.cs" />
+    <Compile Include="Report\CancelledToursReportViewModel.cs" />
+    <Compile Include="Report\InsuranceListViewModel.cs" />
+    <Compile Include="Report\ListTourViewModel.cs" />
+    <Compile Include="Report\OfficePersonCostsViewModel.cs" />
+    <Compile Include="Report\OfficePersonListViewModel.cs" />
+    <Compile Include="Report\OfficePersonSeatViewModel.cs" />
+    <Compile Include="Report\OfficewithDateTimeViewModel.cs" />
+    <Compile Include="Report\PersonInsuranceListViewModel.cs" />
+    <Compile Include="Report\ReportSearchRequest.cs" />
+    <Compile Include="Report\ReserveListforReportViewModel.cs" />
+    <Compile Include="Report\SeatListViewModel.cs" />
+    <Compile Include="Report\TourListforReportViewModel.cs" />
+    <Compile Include="Report\ToursListViewModel.cs" />
+    <Compile Include="Report\ToursReportViewModel.cs" />
+    <Compile Include="Report\VehicleIndexViewModel.cs" />
+    <Compile Include="Reserve\CancelReserveViewModel.cs" />
+    <Compile Include="Reserve\CreateReserveViewModel.cs" />
+    <Compile Include="Reserve\EditReserveViewModel.cs" />
+    <Compile Include="Reserve\ReserveListViewModel.cs" />
+    <Compile Include="Reserve\ReserveSearchRequest.cs" />
+    <Compile Include="Reserve\ReserveSeatViewModel.cs" />
+    <Compile Include="Reserve\PersonCountViewModel.cs" />
+    <Compile Include="Reserve\SelectVehicleViewModel.cs" />
+    <Compile Include="Reserve\ShowPersonViewModel.cs" />
+    <Compile Include="Role\ShowReserveViewModel.cs" />
+    <Compile Include="Role\AddRoleViewModel.cs" />
+    <Compile Include="Role\EditRoleViewModel.cs" />
+    <Compile Include="Role\RoleListViewModel.cs" />
+    <Compile Include="Role\RoleSearchRequest.cs" />
+    <Compile Include="Role\RoleViewModel.cs" />
+    <Compile Include="StateCity\CitySearchRequest.cs" />
+    <Compile Include="StateCity\CreateCityViewModel.cs" />
+    <Compile Include="StateCity\CreateStateViewModel.cs" />
+    <Compile Include="StateCity\EditCityViewModel.cs" />
+    <Compile Include="StateCity\EditStateViewModel.cs" />
+    <Compile Include="StateCity\ListCityViewModel.cs" />
+    <Compile Include="StateCity\ListStateViewModel.cs" />
+    <Compile Include="StateCity\ShowCityViewModel.cs" />
+    <Compile Include="StateCity\ShowStateViewModel.cs" />
+    <Compile Include="StateCity\StateSearchRequest.cs" />
+    <Compile Include="TourVehicle\TourVehicleViewModel.cs" />
+    <Compile Include="Tour\CreateTourViewModel.cs" />
+    <Compile Include="Tour\EditTourViewModel.cs" />
+    <Compile Include="Tour\ListTourViewModel.cs" />
+    <Compile Include="Tour\ShowTourViewModel.cs" />
+    <Compile Include="Tour\TourDetailViewModel.cs" />
+    <Compile Include="Tour\TourSearchRequest.cs" />
+    <Compile Include="Tour\VehicleItemViewModel.cs" />
+    <Compile Include="User\AddUserViewModel.cs" />
+    <Compile Include="User\EditUserViewModel.cs" />
+    <Compile Include="User\UserListViewModel.cs" />
+    <Compile Include="User\UserSearchRequest.cs" />
+    <Compile Include="User\UserViewModel.cs" />
+    <Compile Include="Vehicle\CreateVehicleViewModel.cs" />
+    <Compile Include="Vehicle\CrateSeatViewModel.cs" />
+    <Compile Include="Vehicle\SeatViewModel.cs" />
+    <Compile Include="Vehicle\SmallVehicleListViewModel.cs" />
+    <Compile Include="Vehicle\VehicleEditViewModel.cs" />
+    <Compile Include="Vehicle\VehicleFormatViewModel.cs" />
+    <Compile Include="Vehicle\VehicleListViewModel.cs" />
+    <Compile Include="Vehicle\VehicleSearchRequest.cs" />
+    <Compile Include="Vehicle\ShowVehicleViewModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Agency.DomainClasses\Agency.DomainClasses.csproj">
+      <Project>{47AC1797-A1D7-4767-8A9D-C6530610F652}</Project>
+      <Name>Agency.DomainClasses</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,13 @@
+﻿
+@using Agency.ServiceLayer.Security
+@using Agency.Web.HtmlHelpers
+@using Auth = Agency.ServiceLayer.Security.AssignableToRolePermissions
+
+@if (User.IsInRole(Auth.CanManageUser))
+{
+    @Html.SideBarSecureActionLink("لیست کاربران", Url.Action("List", "User"), "list-group-item first-split", "fa fa-user", AssignableToRolePermissions.CanManageUser)
+}
+@if (User.IsInRole(Auth.CanManageRole))
+{
+    @Html.SideBarSecureActionLink("لیست گروه های کاربری", Url.Action("ListRole", "Role"), "list-group-item first-split", "fa fa-group", AssignableToRolePermissions.CanManageUser)
+}

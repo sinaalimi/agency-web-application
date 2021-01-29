@@ -1,0 +1,87 @@
+﻿@using System.Runtime.CompilerServices
+@using System.Web.Optimization
+@using Agency.Common.HtmlHelpers
+@model Agency.ViewModel.Slider.AddSlideViewModel
+@{
+    ViewBag.Title = "ایجاد اسلاید";
+}
+@using (Html.BeginForm("CreateSlIde","SlIder", FormMethod.Post, new { role = "form", @class = "form-horizontal", autocomplete = "off", id = "createSlIdeForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+
+
+        <div class="panel-body">
+            <hr class="margin-bottom-5 margin-top-5"/>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Title, htmlAttributes: new {@class = "control-label col-md-2"})
+                        <div class="col-md-9">
+                            @Html.NoAutoCompleteTextBoxFor(model => model.Title)
+                            @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Describ, htmlAttributes: new {@class = "control-label col-md-2"})
+                        <div class="col-md-9">
+                            @Html.NoAutoCompleteTextBoxFor(model => model.Describ)
+                            @Html.ValidationMessageFor(model => model.Describ, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ButtonTitle, htmlAttributes: new {@class = "control-label col-md-2"})
+                        <div class="col-md-9">
+                            @Html.NoAutoCompleteTextBoxFor(model => model.ButtonTitle)
+                            @Html.ValidationMessageFor(model => model.ButtonTitle, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Link, htmlAttributes: new {@class = "control-label col-md-2"})
+                        <div class="col-md-9">
+                            @Html.NoAutoCompleteTextBoxFor(model => model.Link)
+                            @Html.ValidationMessageFor(model => model.Link, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Index, htmlAttributes: new {@class = "control-label col-md-2"})
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.Index, new {@class = "form-control", @disabled = true})
+                            @Html.HiddenFor(p => p.Index)
+                            @Html.ValidationMessageFor(model => model.Index, "", new {@class = "text-danger"})
+
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PicSrFile, htmlAttributes: new {@class = "control-label col-md-2"})
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.PicSrFile, new {type = "file", @class = "form-control"})
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+                <button type="button" autocomplete="off" onclick="AjaxForm.CustomSubmit(this, 'createSlIdeForm')" data-loading-text="در حال ارسال اطلاعات" class="btn btn-success btn-md">
+                    ثبت اسلاید
+                </button>
+                <a href="@Url.Action("List","Slider")" class="btn btn-default btn-md">انصراف</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+}
+
+@section Menu{
+    @{Html.RenderPartial("_SlIderManagementSIdeBarMenu");}
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/datePicker")*@
+}

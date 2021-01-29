@@ -1,0 +1,79 @@
+﻿@model Agency.ViewModel.Reserve.PersonCountViewModel
+@using System.Web.Optimization
+@using Agency.Common.HtmlHelpers
+@using Agency.Utilities
+@{
+    ViewBag.Title = "تعداد افراد رزرو";
+}
+
+@using (Html.BeginForm("CreateReserve", "Reserve", FormMethod.Post, new { role = "form", @class = "form-horizontal", autocomplete = "off", id = "CreateVehicleForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(p=>p.TourId)
+    @Html.HiddenFor(p=>p.RemainTourCapacity)
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+            <div class="alert alert-info" style="background-color: #7198b2;" role="alert">
+                <span>ظرفیت باقیمانده : </span>
+                <span>@Model.RemainTourCapacity.GetPersianNumber()</span>
+            </div>
+            <div class="row" style="margin-top: 15px;">
+                <div class="col-md-4">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(p => p.AdultCount, new {@class = "control-label col-md-5"})
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(p => p.AdultCount, new {@class = "form-control numbertxt"})
+                                @Html.ValidationMessageFor(p => p.AdultCount, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(p => p.ChildCount, new {@class = "control-label col-md-5"})
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(p => p.ChildCount, new {@class = "form-control numbertxt"})
+                                @Html.ValidationMessageFor(p => p.ChildCount, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            @Html.LabelFor(p => p.BabyCount, new {@class = "control-label col-md-5"})
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(p => p.BabyCount, new {@class = "form-control numbertxt"})
+                                @Html.ValidationMessageFor(p => p.BabyCount, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+                <button type="button" autocomplete="off" onclick="AjaxForm.CustomSubmit(this, 'CreateVehicleForm')" data-loading-text="در حال ارسال اطلاعات" class="btn btn-success btn-md">
+                    ثبت
+                </button>
+                <a href="@Url.Action("List","Tour")" class="btn btn-default btn-md">انصراف</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+
+    </div>
+}
+
+@section Menu{
+    @{Html.RenderPartial("_VehicleManagmentSideBarMenu");}
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

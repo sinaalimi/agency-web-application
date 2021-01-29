@@ -1,0 +1,46 @@
+﻿@model Agency.ViewModel.Room.RoomEditViewModel
+@using Agency.DomainClasses.Entities.MainHotel
+
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header ">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h5 class="modal-title">ویرایش اتاق</h5>
+        </div>
+        @using (Ajax.BeginForm("Edit", "Room", new AjaxOptions { HttpMethod = "POST", OnComplete = "editModelaOnComplete(xhr, status, 'room-" + Model.Id + "', '#modal','editRoomForm','#editRoomButton')" }, new { @class = "form-horizontal", id = "editRoomForm", autocomplete = "off" }))
+        {
+            <div class="modal-body">
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(p => p.Id)
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Type, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(p => p.Type, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Type, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+               
+                <div class="row">
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Capacity, new { @class = "col-md-2 control-label" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(p => p.Capacity, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.Capacity, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="editRoomButton" autocomplete="off" onclick="AjaxForm.CustomSubmit(this, 'editRoomForm')" data-loading-text="در حال ارسال اطلاعات" class="btn btn-success btn-md">
+                    ذخیره تغییرات
+                </button>
+                <button class="btn btn-default btn-md" data-dismiss="modal" aria-hidden="true">
+                    انصراف
+                </button>
+            </div>
+        }
+    </div>
+</div>

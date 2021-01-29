@@ -1,0 +1,131 @@
+﻿@using Agency.Utilities
+@model Agency.ViewModel.Tour.ShowTourViewModel
+@using Auth = Agency.ServiceLayer.Security.AssignableToRolePermissions;
+
+@Html.HiddenFor(p => Model.Id)
+<div class="col-md-12" id="tour-@Model.Id">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row" style="height: 100px;">
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted"> عنوان تور :</label>
+                            <small>@Model.Title</small>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="text-muted">ظرفیت تور :</label>
+                            <small>@Model.Capacity</small>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">مبدا :</label>
+                            <small>@Model.SourceCity</small>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">مقصد :</label>
+                            <small>@Model.DesCity</small>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted">تاریخ اعزام :</label>
+                            <small>@Model.StartTime.ToPersianString(PersianDateTimeFormat.Date)</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted">تاریخ برگشت :</label>
+                            <small>@Model.EndTime.ToPersianString(PersianDateTimeFormat.Date)</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted">پایان مهلت ثبت نام :</label>
+                            <small>@Model.FinishRegister.ToPersianString(PersianDateTimeFormat.Date)</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted">نام سرپرست :</label>
+                            <small>@Model.SupervisorName</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="text-muted">وسیله نقلیه :</label>
+                            @{
+                                int i = 0;
+                                foreach (var item in Model.Vehicles)
+                                {
+                                    i++;
+                            <small>@item.Name</small>
+                                    if (i < Model.Vehicles.Count)
+                                    {
+                            <small>,</small>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="text-muted">هتل ها :</label>
+                            @{
+                                int ii = 0;
+                                foreach (var item in Model.Hotels)
+                                {
+                                    ii++;
+                            <small>@item.Name</small>
+                                    if (ii < Model.Hotels.Count)
+                                    {
+                            <small>,</small>
+                                    }
+
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+                @if (Model.ImageSrc != null)
+                {
+                    <div class="col-md-2" style="height: 140px;">
+                        <img src="/Content/TourPhotoes/@Model.ImageSrc" style="height: 100%; width: 100%;" />
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+                @{
+                    var datetimenow = DateTime.Now;
+                }
+                @if (!Model.IsCanceled && Model.FinishRegister >= datetimenow)
+                {
+                    if (User.IsInRole(Auth.CanDoReserve))
+                    {
+                        <a href="@Url.Action("Create", "Reserve", new {id = Model.Id})" class="btn btn-sm btn-primary" type="button">
+                            <i class="fa fa-edit"></i>
+                            رزرو
+                        </a>
+                    }
+                    if (User.IsInRole(Auth.CanEditTour))
+                    {
+                        <a href="@Url.Action("Edit", "Tour", new {id = Model.Id})" class="btn btn-sm btn-primary" type="button">
+                            <i class="fa fa-edit"></i>
+                            ویرایش
+                        </a>
+                    }
+                }
+
+                @if (User.IsInRole(Auth.CanManageTour))
+                {
+                    <a href="@Url.Action("Details", "Tour", new {id = Model.Id})" class="btn btn-sm btn-info" type="button">
+                        <i class="fa fa-align-justify"></i>
+                        مشاهده اطلاعت بیشتر
+                    </a>
+                }
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

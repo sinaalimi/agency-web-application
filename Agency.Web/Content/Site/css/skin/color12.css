@@ -1,0 +1,146 @@
+.navbar-default .navbar-nav > li > a:hover::before, 
+.navbar-default .navbar-nav > .active > a::before{
+	background-color:#c1b72b;
+}
+.navbar-default .navbar-nav > .active > a, 
+.navbar-default .navbar-nav > .active > a:focus, 
+.navbar-default .navbar-nav > .active > a:hover, 
+.navbar-default .navbar-nav > li > a:hover{
+	color:#c1b72b;
+}
+.btn.btn-primary{
+	border:1px solid #c1b72b;
+	background:#c1b72b;
+}
+.btn.btn-primary:hover{
+	border-color:#c1b72b;
+	color:#c1b72b;
+}
+.btn.btn-default{
+	border:1px solid #c1b72b;
+	color:#c1b72b;
+}
+.btn.btn-default:hover{
+	background:#c1b72b;
+	border-color:#c1b72b;
+}
+.section-title{
+	background:url("../../img/icon/icon12.png") no-repeat scroll center bottom
+}
+.service-list .fa{
+	color:#c1b72b;
+}
+
+.service-list:hover .fa{
+	background:#c1b72b;
+}
+
+.back-top i{
+	background:#c1b72b;
+}
+.price-info{
+	background:#c1b72b;
+}
+.count-section li:hover .fa{
+	background:#c1b72b;
+}
+#filter-list li.active, 
+#filter-list li:hover{
+	background:#c1b72b;
+}
+.owl-dot.active{
+	background:#c1b72b;
+}
+#footer li a:hover{
+	background:#c1b72b;
+}
+.post_bottom ul li a span{
+	background:#c1b72b;
+}
+
+.tag-list li a:hover{
+	background:#c1b72b;
+}
+.search-submit{
+	background:#c1b72b;
+}
+
+.discount-info a:hover{
+	color:#c1b72b;
+}
+
+
+.gallery-item a:hover{
+	color:#c1b72b;
+}
+.post:hover{
+	border-color:#c1b72b;
+}
+.post-overlay .fa{
+	color:#c1b72b;
+}
+
+.post-comments a:hover{
+	color:#c1b72b;
+}
+
+
+.control:hover{
+	color:#c1b72b;
+}
+.meta > span a:hover{
+	color:#c1b72b;
+}
+.comment-list .list-inline a:hover{
+	color:#c1b72b;
+}
+.category-list li a:hover{
+	color:#c1b72b;
+}
+.archive-list li a:hover{
+	color:#c1b72b;
+}
+
+
+
+#filter-list li.active,
+#filter-list li:hover{
+	border-color:#c1b72b;
+}
+.owl-dot{
+	border-color:#c1b72b;
+}
+.form-control:focus{
+	border-color:#c1b72b;
+}
+.post:hover{
+	border-color:#c1b72b;
+}
+.author img{
+	border-color:#c1b72b;
+}
+blockquote{
+	border-color:#c1b72b;
+}
+.sidebar-item h3{
+	border-color:#c1b72b;
+}
+
+.sidebar-item .form-control:focus{
+	border-color:#c1b72b;
+}
+.tag-list li a:hover{
+	border-color:#c1b72b;
+}
+.category-list li a:hover{
+	border-color:#c1b72b;
+}
+.archive-list li a:hover{
+	border-color:#c1b72b;
+}
+.navbar-default .navbar-toggle{
+	border-color:#c1b72b;
+}
+#color-switcher h2 a{
+	background:#c1b72b;
+}

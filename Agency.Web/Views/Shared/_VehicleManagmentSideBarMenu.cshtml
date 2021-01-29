@@ -1,0 +1,12 @@
+﻿@using Agency.ServiceLayer.Security
+@using Auth = Agency.ServiceLayer.Security.AssignableToRolePermissions
+
+@using Agency.Web.HtmlHelpers
+@if (User.IsInRole(Auth.CanCreateVehicle))
+{
+    @Html.SideBarSecureActionLink("تعریف وسیله نقلیه", Url.Action("Create", "Vehicle"), "list-group-item second-split", "fa fa-user", AssignableToRolePermissions.CanManageUser)
+}
+@if (User.IsInRole(Auth.CanManageVehicle))
+{
+    @Html.SideBarSecureActionLink("نمایش وسایل نقلیه", Url.Action("List", "Vehicle"), "list-group-item second-split", "fa fa-user", AssignableToRolePermissions.CanManageUser)
+}

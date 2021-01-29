@@ -1,0 +1,14 @@
+﻿@using Agency.ServiceLayer.Security
+@using Auth = Agency.ServiceLayer.Security.AssignableToRolePermissions
+
+@using Agency.Web.HtmlHelpers
+
+    @Html.SideBarSecureActionLink("گزارش های تور", Url.Action("List", "Report"), "list-group-item second-split", "fa fa-user", AssignableToRolePermissions.CanManageUser)
+
+
+
+
+    @Html.SideBarSecureActionLink("گزارش دفاتر", Url.Action("ListTour", "Report"), "list-group-item second-split", "fa fa-user", AssignableToRolePermissions.CanManageUser)
+
+
+

@@ -1,0 +1,253 @@
+﻿@model Agency.ViewModel.Tour.ListTourSummeryViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>کل تورها</title>
+    <link rel="shortcut icon" href="~/Content/Site/img/favicon.png" type="image/x-icon">
+
+    <!-- Bootstrap Core CSS -->
+    <link href="~/Content/Site/css/bootstrap.min.css" rel="stylesheet">
+    <!--Datepicker-->
+    <link href="~/Content/Site/css/datepicker.css" rel="stylesheet">
+    <!-- Animate CSS -->
+    <link href="~/Content/Site/css/animate.css" rel="stylesheet">
+    <!--Fancybox-->
+    <link href="~/Content/Site/css/jquery.fancybox.css" rel="stylesheet">
+    <!-- font-awesome-->
+    <link rel="stylesheet" href="~/Content/Site/fonts/font-awesome/css/font-awesome.min.css">
+    <!--Owl Carousel-->
+    <link href="~/Content/Site/css/owl.carousel.css" rel="stylesheet">
+    <!--Google Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,500,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Roboto+Condensed:400,300italic,400italic,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Dancing+Script' rel='stylesheet' type='text/css'>
+    <!-- Main CSS -->
+    <link href="~/Content/Site/css/style.css" rel="stylesheet">
+    <!-- Color switcher -->
+    <link rel="stylesheet" href="~/Content/Site/css/skin/switcher.css">
+    <link rel="stylesheet" href="~/Content/Site/css/skin/color-skin-name.html" id="colors">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<!-- The #page-top ID is part of the scrolling feature - the data-spy and data-target are part of the built-in Bootstrap scrollspy function -->
+
+<body id="page-top">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                @*<div class="navbar-header page-scroll">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand page-scroll" href="index.html"><img src="~/Content/Site/img/logo.png" alt="Logo" /></a>
+                    </div>*@
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="navbar">
+                    <ul class="nav navbar-nav navbar-right" style="margin-right: 200px;">
+                        <li class="active">
+                            <a class="page-scroll" href="http://zaer-mashhad.ir/#page-top">خانه</a>
+                        </li>
+                        @*<li>
+                                <a class="page-scroll" href="#services">سرویس ها</a>
+                            </li>*@
+                        <li>
+                            <a class="page-scroll" href="http://zaer-mashhad.ir/#packages">پکیج ها</a>
+                        </li>
+                        @*<li>
+                    <a class="page-scroll" href="#hot-deals">هتل ها</a>
+                </li>*@
+
+                        @*<li>
+                                <a class="page-scroll" href="http://localhost:4147/#deals-discounts">تخفیف ها</a>
+                            </li>
+                            <li>
+                                <a class="page-scroll" href="http://localhost:4147/#gallery">گالری</a>
+                            </li>*@
+                        @*<li>
+                    <a class="page-scroll" href="#blog">بلاگ</a>
+                </li>*@
+                        @*<li>
+                                <a class="page-scroll" href="http://localhost:4147/#testimonials">تصدیق نامه</a>
+                            </li>*@
+                        <li>
+                            <a class="page-scroll" href="http://zaer-mashhad.ir/#contact-us">ارتباط با ما</a>
+                        </li>
+                        <li>
+                            <a class="page-scroll" href=@Url.Action("Login","Account")>ورود</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+</nav>
+
+    <!-- Page Title-->
+<section id="page-title" class="parallax" data-stellar-background-ratio="0.5" style="background-image: url(/Content/Images/singlepage.jpg);">
+    <div class="title-info">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="page-title text-center">
+                        <h1>کل تورها</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div><!--end title-info-->
+</section>
+    <!--end page-title-->
+    
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+            <section id="packages" class="inverse">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="section-title text-center">
+                                <h1></h1>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        @foreach (var tour in Model.Tours)
+                        {
+                            var days = (tour.EndTime - tour.StartTime).Days;
+                            <div class="col-xs-6 col-sm-6 col-md-4">
+                                <div class="package-list wow fadeInUp">
+                                    <a href="@Url.Action("GetTour", new {id = tour.Id})">
+                                        <div class="package-thumb">
+                                            <img src="~/Content/TourPhotoes/@tour.ImageSrc" alt="" />
+                                            <div class="duration">
+                                                @days روز
+                                            </div>
+                                        </div>
+                                        <div class="package-info">
+                                            <hr style="margin-top: 0; margin-bottom: 0; border-width: 3px;" />
+
+                                            <h3>@tour.Title</h3>
+                                            <p>
+                                                @tour.Summery
+                                            </p>
+                                            @*<span class="pull-left" style="position: absolute; bottom: 13px; left: 15px;">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <span class="review-count"> - 100 review</span>
+                                        </span>*@
+                                            @*<span class="pull-right price">$1400</span>*@
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+    <!--end main-content-->
+@Html.Action("AboutUs","SiteHome")
+<footer id="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-5">
+                <div class="text-left">
+                    <a href="http://orumdigi.ir"><img src="~/Content/Images/logo-1.png" style="height: 50px;" /></a>
+                    @*<ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="#"><i class="fa fa-youtube"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                        </ul>*@
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-7">
+                <div class="text-right">
+                    @*<p>&copy; Copyright 2016. All Rights Reserved.</p>*@
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+    <!-- Bact to top Section-->
+    <div class="back-top">
+        <a href="#"><i class="fa fa-angle-up"></i></a>
+    </div>
+
+    <!-- Color Switcher -->
+    <div id="color-switcher" hidden>
+        <h2>Choose Color<a href="#"><i class="fa fa-cog fa-spin"></i></a></h2>
+        <div>
+            <ul class="colors" id="color1">
+                <li><a href="#" class="color1"></a></li>
+                <li><a href="#" class="color2"></a></li>
+                <li><a href="#" class="color3"></a></li>
+                <li><a href="#" class="color4"></a></li>
+                <li><a href="#" class="color5"></a></li>
+                <li><a href="#" class="color6"></a></li>
+                <li><a href="#" class="color7"></a></li>
+                <li><a href="#" class="color8"></a></li>
+                <li><a href="#" class="color9"></a></li>
+                <li><a href="#" class="color10"></a></li>
+                <li><a href="#" class="color11"></a></li>
+                <li><a href="#" class="color12"></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script src="~/Content/Site/js/jquery.js"></script>
+    <script src="~/Content/Site/js/bootstrap.min.js"></script>
+    @*<script src="~/Content/Site/js/jquery.easing.min.js"></script>*@
+    <script src="~/Content/Site/js/wow.js"></script>
+    <script src="~/Content/Site/js/jquery.mixitup.min.js"></script>
+    <script src="~/Content/Site/js/jquery.fancybox.pack.js"></script>
+    <script src="~/Content/Site/js/waypoints.min.js"></script>
+    <script src="~/Content/Site/js/jquery.counterup.min.js"></script>
+    <script type="text/javascript" src="~/Content/Site/js/owl.carousel.min.js"></script>
+    <script type="text/javascript" src="~/Content/Site/js/jquery.stellar.min.js"></script>
+    <script type="text/javascript" src="~/Content/Site/js/bootstrap-datepicker.js"></script>
+    @*<script src="~/Content/Site/js/gmap3.min.js"></script>*@
+    <script type="text/javascript" src="~/Content/Site/js/switcher.js"></script>
+    <script src="~/Content/Site/js/script.js"></script>
+
+</body>
+
+</html>
+
+

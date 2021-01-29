@@ -1,0 +1,44 @@
+﻿@using Agency.Utilities
+@model Agency.ViewModel.Report.TourListforReportViewModel
+<div class="col-md-12" id="tour-@Model.Id">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row" style="height: 100px;">
+                <div class="col-md-11">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted"> عنوان تور :</label>
+                            <small>@Model.TourName</small>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="text-muted" for="group">مبدا :</label>
+                            <small>@Model.SourceCity</small>
+                        </div>
+
+                        <div class="col-md-2">
+                            <label class="text-muted" for="group">مقصد :</label>
+                            <small>@Model.DestinationCity</small>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="text-muted">تاریخ اعزام :</label>
+                            <small>@Model.SatrtDate.ToPersianString(PersianDateTimeFormat.Date)</small>
+                        </div>
+                    </div>
+
+                       
+                    </div>
+               </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+                <a href="@Url.Action("ShowReserves", "Report", new {tourId = Model.Id,userId=Model.UserId, startTime = Model.ReportItemStartDate, endTime=Model.ReportItemEndDate})" class="btn btn-sm btn-primary" type="button">
+                    <i class="fa fa-edit"></i>
+                    گزارش دفاتر
+                </a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+

@@ -1,0 +1,44 @@
+﻿@using Agency.Utilities
+@model Agency.ViewModel.ReserveHotel.MainHotelListforReserveViewModel
+<div class="col-md-12" id="tour-@Model.HotelId">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row" style="height: 100px;">
+                <div class="col-md-11">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted"> نام هتل :</label>
+                            <small>@Model.HotelName</small>
+                        </div>
+                        <div class="col-md-2">
+                            <label class="text-muted" for="group">آدرس :</label>
+                            <small>@Model.HotelAddress</small>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <label class="text-muted" for="group">توضیحات :</label>
+                                <small>@Model.Description</small>
+                            </div>
+                        </div>
+                       
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+                @*///////////  اینجا رو نگاه کن*@
+                <a href="@Url.Action("ShowRooms", "ReserveHotel", new {hotelid = Model.HotelId,start=Model.ListItemStartDate,night=Model.Night})" class="btn btn-sm btn-primary" type="button">
+                    <i class="fa fa-edit"></i>
+                    اتاق ها
+                </a>
+               </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+
+

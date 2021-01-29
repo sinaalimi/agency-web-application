@@ -1,0 +1,74 @@
+﻿@using Agency.Common.HtmlHelpers
+@model Agency.ViewModel.Slider.SliderViewModel
+@using Auth = Agency.ServiceLayer.Security.AssignableToRolePermissions;
+
+<div class="col-md-12" id="slide-@Model.Id">
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+            <div class="row" style="height: 150px;">
+                <div class="col-md-2" style="height: 140px;">
+                    <img src="/Content/SliderPhotoes/@Model.PicSrc" style="height: 100%; width: 100%;"/>
+                </div>
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted">عنوان اسلاید :</label>
+                            <small>@Model.Title</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">اندیس :</label>
+                            <small id="group">@Model.Index</small>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted" for="order">توضیحات :</label>
+                            <small id="order">@Model.Describ</small>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted" for="order">عنوان دکمه :</label>
+                            <small id="order">@Model.ButtonTitle</small>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted" for="order">لینک :</label>
+                            <small id="order">@Model.Link</small>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            @*@{Html.RenderPartial("_AuditLog", Model);}*@
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+                @*@if (User.IsInRole(Auth.CanEditSlide))
+                {*@
+                    <a href="@Url.Action("Edit", "SlIder", new {id = Model.Id, index = Model.Index})" class="btn btn-sm btn-primary" type="button">
+                        <i class="fa fa-edit"></i>
+                        ویرایش
+                    </a>
+                    @*}
+                @if (User.IsInRole(Auth.CanDeleteSlide))
+                {*@
+                    <button class="btn-sm btn btn-danger"
+                            type="button" data-delete-url="@Url.Action("Delete", "SlIder")" data-removal-element="#slide-@Model.Id" id="remove-@Model.Id">
+                        <i class="fa fa-trash-o"></i>
+                        حذف
+                    </button>
+                    @*}*@
+
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>

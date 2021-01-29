@@ -1,0 +1,67 @@
+﻿@using Agency.Common.HtmlHelpers
+@using Agency.Utilities
+@model Agency.ViewModel.Hotel.HotelDetailViewModel
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">اطلاعات هتل</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <h3 class="line-status">
+                            <small class="text-muted">
+                                <i class="fa fa-plane"></i>
+                                مشخصات هتل
+                            </small>
+                        </h3>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>نام هتل:</label>
+                                <small>@Model.Name</small>
+                            </div>
+                            <div class="col-md-3">
+                                <label>درجه هتل</label>
+                                <small>@Model.Degree</small>
+                            </div>
+                            <div class="col-md-3">
+                                <label>آدرس:</label>
+                                <small>@Model.Address</small>
+                            </div>
+                            <div class="col-md-3">
+                                <label>شماره تلفن:</label>
+                                <small>@Model.PhoneNumber</small>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>استان:</label>
+                                <small>@Model.StateName</small>
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>شهر:</label>
+                                <small>@Model.CityName</small>
+                            </div>
+                            <div class="col-md-6">
+                                <label>توضیحات:</label>
+                                <small>@Html.Raw(Model.Description)</small>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                
+              
+
+            </div>
+        </div>
+    </div>
+    @section Menu{
+        @{Html.RenderPartial("_TourManagementSideBarMenu");}
+    }
+

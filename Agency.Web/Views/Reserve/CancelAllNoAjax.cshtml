@@ -1,0 +1,58 @@
+﻿@{
+    ViewBag.Title = "CancelAllNoAjax";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model Agency.ViewModel.Jarime.JarimeViewModel
+@using System.Web.Optimization
+@using Agency.Common.HtmlHelpers
+@{
+    ViewBag.Title = "کنسل کردن رزرو";
+}
+
+@using (Html.BeginForm("CancelAllReserve", "Reserve", FormMethod.Post, new { role = "form", @class = "form-horizontal", autocomplete = "off", id = "CreateVehicleForm", enctype = "multipart/form-data" }))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+            @Html.HiddenFor(p => p.CodeRahgiri)
+            @Html.HiddenFor(p => p.FinalTotalPrice)
+            @Html.HiddenFor(p => p.IsParent)
+            @Html.HiddenFor(p => p.ParentName)
+            @Html.HiddenFor(p => p.PenaltyPrice)
+            @Html.HiddenFor(p => p.Percent)
+            @Html.HiddenFor(p => p.PersonId)
+            @Html.HiddenFor(p => p.PersonName)
+            @Html.HiddenFor(p => p.Price)
+            @Html.HiddenFor(p => p.ReserveId)
+            @Html.HiddenFor(p => p.TourName)
+            <div class="modal-body">
+                هزینه برای این رزرو @Model.Price ریال بوده است که در صورت کنسل کردن
+                با کسر @Model.Percent درصد از هزینه پرداختی
+                مبلغ @Model.FinalTotalPrice باید به مشتری پرداخت شود
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+                <button type="submit"  class="btn btn-success btn-md">
+                    تایید و دانلود فرم کنسلی
+                </button>
+                <a href="@Url.Action("List","Reserve")" class="btn btn-default btn-md">انصراف</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+
+    </div>
+}
+
+@section Menu{
+    @{Html.RenderPartial("_ReserveManagmentSideBar");}
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/datePicker")*@
+}

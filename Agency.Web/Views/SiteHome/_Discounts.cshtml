@@ -1,0 +1,81 @@
+﻿@using Agency.Utilities
+@model Agency.ViewModel.Tour.ListTourSummeryViewModel
+
+<section id="deals-discounts" class="inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-title text-center">
+                    <h1>تور های قبل</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="owl-carousel" id="deals-discounts-carousel">
+                    @foreach (var item in Model.Tours)
+                    {
+                        <div class="tour-item">
+                            <div class="thumb">
+                                <img src="~/Content/TourPhotoes/@item.ImageSrc" alt="@item.Title" />
+                            </div>
+
+                            <div class="discount-info">
+                                <div class="price-info">
+                                    @*<span class="regular-price">$430</span>
+                                    <span class="sale-price">$380</span>*@
+                                    <span style="font-family: wyekan; text-decoration: blink;" class="regular-price">@item.EndTime.ToPersianString(PersianDateTimeFormat.Date).GetEnglishNumber()</span>
+                                </div>
+                                <h3>@item.Title</h3>
+                                <p>
+                                    @item.Summery
+                                </p>
+                                <a href="tour-details.html">View  <i class="fa fa-long-arrow-right"></i></a>
+                                <span class="pull-right">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star-half-o"></i>
+                                </span>
+                            </div>
+
+                        </div>
+                    }
+                    @*<div class="tour-item">
+                        <div class="thumb">
+                            <img src="~/Content/Site/img/blog/2.jpg" alt=""/>
+                        </div>
+
+                        <div class="discount-info">
+                            <div class="price-info">
+                                <span class="regular-price">$430</span>
+                                <span class="sale-price">$380</span>
+                                <span style="font-family: wyekan; text-decoration: blink;" class="regular-price">akjsdksadsk</span>
+                            </div>
+                            <h3>sdsdssa</h3>
+                            <p>
+                                sadsadasdasdasd
+                            </p>
+                            <a href="tour-details.html">View <i class="fa fa-long-arrow-right"></i></a>
+                            <span class="pull-right">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-half-o"></i>
+                            </span>
+                        </div>
+
+                    </div>*@
+
+
+
+                </div><!--end deals-discounts-carousel-->
+            </div>
+        </div>
+
+    </div>
+
+</section>

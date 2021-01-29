@@ -1,0 +1,75 @@
+﻿@using System.Web.Optimization
+@using Agency.Common.HtmlHelpers
+@model Agency.ViewModel.Vehicle.VehicleEditViewModel
+@{
+    ViewBag.Title = "تعریف وسیله نقلیه";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+@using (Html.BeginForm("Edit", "Vehicle", FormMethod.Post, new { role = "form", @class = "form-horizontal", autocomplete = "off", id = "CreateVehicleForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(p=>Model.ImageSource)
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+            <div class="row" style="margin-top: 15px;">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.LabelFor(p => p.Name, new {@class = "control-label col-md-3"})
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(p => p.Name, new {@class = "form-control"})
+                                    @Html.ValidationMessageFor(p => p.Name, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                @Html.LabelFor(p => p.Capacity, new {@class = "control-label col-md-3"})
+                                <div class="col-md-6">
+                                    @Html.TextBoxFor(p => p.Capacity, new {@class = "form-control numbertxt"})
+                                    @Html.ValidationMessageFor(p => p.Capacity, "", new {@class = "text-danger"})
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6" >
+                        @if (Model.ImageSource != null)
+                    {
+                            <div class="col-md-9 col-md-offset-2" style="height:70%; ">
+                                <img src="/Content/VehiclePhoto/@Model.ImageSource" style="height: 100%; width: 100%;" />
+                            </div>
+                        }
+                    </div>
+                </div>
+                
+            </div>
+     
+        <div class="panel-footer">
+            <div class="pull-left">
+                <button type="button" autocomplete="off" onclick="AjaxForm.CustomSubmit(this, 'CreateVehicleForm')" data-loading-text="در حال ارسال اطلاعات" class="btn btn-success btn-md">
+                    ویرایش
+                </button>
+                <a href="@Url.Action("List","Vehicle")" class="btn btn-default btn-md">انصراف</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+
+    </div>
+}
+
+@section Menu{
+    @{Html.RenderPartial("_VehicleManagmentSideBarMenu");}
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

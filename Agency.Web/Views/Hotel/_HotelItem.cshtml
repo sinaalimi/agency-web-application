@@ -1,0 +1,82 @@
+﻿@model Agency.ViewModel.Hotel.ShowHotelViewModel
+@using Auth = Agency.ServiceLayer.Security.AssignableToRolePermissions
+
+<div class="col-md-12" id="hotel-@Model.Id">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row" style="height: 100px;">
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted">نام :</label>
+                            <small>@Model.Name</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">درجه :</label>
+                            <small>@Model.Degree</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">شهر :</label>
+                            <small>@Model.City.Name</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">استان :</label>
+                            <small>@Model.State.Name</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted">نام مدیر :</label>
+                            <small>@Model.ManagerName</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">شماره تلفن :</label>
+                            <small>@Model.PhoneNumber</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">آدرس :</label>
+                            <small>@Model.Address</small>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="text-muted">توضیحات :</label>
+                            <small style="display: block; word-wrap: break-word;">@Html.Raw(@Model.Description)</small>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.ImageSource!=null )
+                {
+                    <div class="col-md-2" style="height: 140px;">
+                        <img src="/Content/HotelPhotoes/@Model.ImageSource" style="height: 100%; width: 100%;"/>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+                @if (User.IsInRole(Auth.CanEditHotel))
+                {
+                    <a href="@Url.Action("Edit", "Hotel", new {id = Model.Id})" class="btn btn-sm btn-primary" type="button">
+                        <i class="fa fa-edit"></i>
+                        ویرایش
+                    </a>
+                }
+
+                <a href="@Url.Action("Details", "Hotel", new {id = Model.Id})" class="btn btn-sm btn-info" type="button">
+                    <i class="fa fa-align-justify"></i>
+                    مشاهده اطلاعت بیشتر
+                </a>
+                @if (User.IsInRole(Auth.CanDeleteHotel))
+                {
+                    <button class="btn-sm btn btn-danger"
+                            type="button" data-delete-url="@Url.Action("Delete", "Hotel")" data-removal-element="#hotel-@Model.Id" id="remove-@Model.Id">
+                        <i class="fa fa-trash-o"></i>
+                        حذف
+                    </button>
+                }
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+

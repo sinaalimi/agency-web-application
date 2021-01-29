@@ -1,0 +1,238 @@
+﻿@using Agency.Common.HtmlHelpers
+@using Agency.Utilities
+
+@model Agency.ViewModel.Tour.TourDetailViewModel
+@{
+    ViewBag.Title = "مشاهده جزئیات مشتری";
+}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">اطلاعات تور</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <h3 class="line-status">
+                            <small class="text-muted">
+                                <i class="fa fa-plane"></i>
+                                مشخصات تور
+                            </small>
+                        </h3>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>نام تور:</label>
+                                <small>@Model.Title</small>
+                            </div>
+                            <div class="col-md-3">
+                                <label>مبدا:</label>
+                                <small>@Model.SourceCity</small>
+                            </div>
+                            <div class="col-md-3">
+                                <label>مقصد:</label>
+                                <small>@Model.DesCity</small>
+                            </div>
+                            <div class="col-md-3">
+                                <label>ظرفیت:</label>
+                                <small>@Model.Capacity</small>
+                            </div>
+                            <div class="col-md-3">
+                                <label>نام سرپرست تور:</label>
+                                <small>@Model.SupervisorName</small>
+                            </div>
+                            <div class="col-md-12">
+                                <label>مسیر رفت:</label>
+                                <small>@Model.ComeRoad</small>
+                            </div>
+
+                            <div class="col-md-12">
+                                <label>مسیر برگشت:</label>
+                                <small>@Model.GoRoad</small>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <h3 class="line-status">
+                            <small>
+                                <i class="fa fa-clock-o"></i>
+                                اطلاعات زمانی
+                            </small>
+                        </h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>تاریخ اعزام:</label>
+                                <small>@Model.StartTime.ToPersianString(PersianDateTimeFormat.Date)</small>
+                            </div>
+                            <div class="col-md-6">
+                                <label>تاریخ برگشت:</label>
+                                <small>@Model.EndTime.ToPersianString(PersianDateTimeFormat.Date)</small>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>ساعت حرکت:</label>
+                                <small>@Model.StartHour</small>
+                            </div>
+                            <div class="col-md-6">
+                                <label>پایان ثبت نام:</label>
+                                <small>@Model.FinishRegister.ToPersianString(PersianDateTimeFormat.Date)</small>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <h3 class="line-status">
+                            <small>
+                                <i class="fa fa-bus"></i>
+                                اطلاعات وسیله نقلیه
+                            </small>
+                        </h3>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>وسیله نقلیه:</label>
+                                @{
+                                    int i = 0;
+                                    foreach (var item in Model.Vehicles)
+                                    {
+                                        i++;
+                                        <small>@item</small>
+                                        if (i < Model.Vehicles.Count)
+                                        {
+                                            <small>,</small>
+                                        }
+
+                                    }
+                                }
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <h3 class="line-status">
+                            <small>
+                                <i class=" fa fa-hotel"></i>
+                                اطلاعات هتل
+                            </small>
+                        </h3>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>هتل:</label>
+                                @{
+                                    int ii = 0;
+                                    foreach (var item in Model.Hotels)
+                                    {
+                                        ii++;
+                                        <small>@item</small>
+                                        if (ii < Model.Hotels.Count)
+                                        {
+                                            <small>،</small>
+                                        }
+
+                                    }
+
+                                }
+
+                            </div>
+                        </div>
+                       
+                            @for (var j = 0; j < Model.Hotels.Count; j++)
+                            {
+                                <div class="row col-md-12" style="word-break: break-word;">
+                                        <label>توضیحات هتل @i:</label>
+                                        @{
+                                            <div>@Html.Raw(Model.HotelDesciption[j])</div>
+                                            <br/>
+                                        }
+                                    </div>
+                                    }
+
+
+                                </div>
+            <div class="row col-md-12">
+                <div class="col-md-12">
+                    <h3 class="line-status">
+                        <small>
+                            <i class="fa fa-money"></i>
+                            هزینه ها
+                        </small>
+                    </h3>
+
+                    <div class="row col-md-12">
+                        <div class="col-md-4">
+                            <label>هزینه بزرگسال:</label>
+                            <small>@Model.AdultPrice</small>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>هزینه کودک:</label>
+                            <small>@Model.ChildPrice</small>
+                        </div>
+                    </div>
+                    <div class="row col-md-12">
+                        <div class="col-md-4">
+                            <label>هزینه بیمه:</label>
+                            <small>@Model.IsurancePrice</small>
+                        </div>
+                        <div class="col-md-4">
+                            <label>سهم آژانس:</label>
+                            <small>@Model.AgencyShare</small>
+                        </div>
+                        <div class="col-md-4">
+                            <label>سهم دفتر:</label>
+                            <small>@Model.OfficeCost</small>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+                <div class="row col-md-12">
+                    <div class="col-md-12 ">
+                        <h3 class="line-status">
+                            <small>
+                                <i class="fa fa-money"></i>
+                                آپشن ها
+                            </small>
+                        </h3>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <label>آپشن های تور:</label>
+                                @{
+                                    var iiii = 0;
+                                    foreach (var item in Model.OptionsList)
+                                    {
+                                        iiii++;
+                                        <small>@item.Title</small>
+                                        if (iiii < Model.OptionsList.Count)
+                                        {
+                                            <small>, </small>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+                 </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+@section Menu{
+    @{Html.RenderPartial("_TourManagementSideBarMenu");}
+}

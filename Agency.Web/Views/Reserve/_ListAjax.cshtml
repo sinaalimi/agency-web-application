@@ -1,0 +1,8 @@
+﻿@model  Agency.ViewModel.Reserve.ReserveListViewModel
+
+@foreach (var reserve in Model.Reserves)
+{
+    @Html.Partial("_ReserveItem", reserve)
+}
+
+

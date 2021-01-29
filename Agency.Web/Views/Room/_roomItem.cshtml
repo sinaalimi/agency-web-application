@@ -1,0 +1,44 @@
+﻿@using Agency.DomainClasses.Entities.Vehicle
+@model Agency.ViewModel.Room.ShowRoomViewModel
+
+
+<div class="col-md-12" id="room-@Model.Id">
+    <div class="panel panel-default">
+
+        <div class="panel-body">
+            <div class="row" style="height: 50px;">
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">نوع :</label>
+                            <small>@Model.Type</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">ظرفیت :</label>
+                            <small>@Model.Capacity</small>
+                        </div>
+    
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+              
+
+                <a class="btn btn-primary btn-sm" data-ajax="true" data-ajax-mode="replace" data-ajax-method="GET" data-ajax-success="onSuccessFormValidation(data, status, xhr,'editRoomForm','modal')"
+                   data-ajax-update="#modal" data-ajax-url="@Url.Action("Edit", new {id = Model.Id})" role="button"><b><i class="fa fa-edit"></i></b>ویرایش</a>
+
+                <button class="btn-sm btn btn-danger"
+                        type="button" data-delete-url="@Url.Action("Delete", "Room")" data-removal-element="#room-@Model.Id" id="remove-@Model.Id">
+                    <i class="fa fa-trash-o"></i>
+                    حذف
+                </button>
+                @*}*@
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+</div>
+

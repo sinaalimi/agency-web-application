@@ -1,0 +1,15 @@
+﻿@using Agency.ServiceLayer.Security
+@using Auth = Agency.ServiceLayer.Security.AssignableToRolePermissions
+
+@using Agency.Web.HtmlHelpers
+@if (User.IsInRole(Auth.CanCreateHotel))
+{
+    @Html.SideBarSecureActionLink("تعریف هتل", Url.Action("Create", "Hotel"), "list-group-item second-split", "fa fa-user", AssignableToRolePermissions.CanManageUser)
+}
+@if (User.IsInRole(Auth.CanManageHotel))
+{
+    @Html.SideBarSecureActionLink("نمایش هتل ها", Url.Action("List", "Hotel"), "list-group-item second-split", "fa fa-user", AssignableToRolePermissions.CanManageUser)
+}
+
+
+

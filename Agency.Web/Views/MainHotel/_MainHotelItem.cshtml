@@ -1,0 +1,102 @@
+﻿@using Agency.Utilities
+@model Agency.ViewModel.MainHotel.ShowMainHotelViewModel
+<div class="col-md-12" id="tour-@Model.Id">
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="row" style="height: 100px;">
+                <div class="col-md-10">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted"> نام هتل :</label>
+                            <small>@Model.Name</small>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="text-muted">شهر :</label>
+                            <small>@Model.CityName</small>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">استان :</label>
+                            <small>@Model.StateName</small>
+                        </div>
+
+                        <div class="col-md-3">
+                            <label class="text-muted" for="group">تلفن :</label>
+                            <small>@Model.Tel</small>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <label class="text-muted">آدرس :</label>
+                            <small>@Model.Adress</small>
+                        </div>
+                        <div class="col-md-3">
+                            <label class="text-muted">اتاق :</label>
+                            @{
+                                int i = 0;
+                                foreach (var item in Model.Rooms)
+                                {
+                                    i++;
+                                    <small>@item.Type</small>
+                                    if (i < Model.Rooms.Count)
+                                    {
+                                        <small>,</small>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+
+                </div>
+                @if (Model.Image != null)
+                {
+                    <div class="col-md-2" style="height: 140px;">
+                        <img src="/Content/TourPhotoes/@Model.Image" style="height: 100%; width: 100%;"/>
+                    </div>
+                }
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+                @*<a href="@Url.Action("Create", "Reserve", new {id = Model.Id})" class="btn btn-sm btn-primary" type="button">
+                    <i class="fa fa-edit"></i>
+                    رزرو
+                </a>*@
+                @*@if (User.IsInRole(Auth.CanEditCustomer))*@
+
+                <a href="@Url.Action("Edit", "MainHotel", new {id = Model.Id})" class="btn btn-sm btn-primary" type="button">
+                    <i class="fa fa-edit"></i>
+                    ویرایش
+                </a>
+
+                @*@if (User.IsInRole(Auth.CanSeeDetailOfCustomer))
+                    {*@
+                @*<a href="@Url.Action("Details", "Tour", new {id = Model.Id})" class="btn btn-sm btn-info" type="button">
+                    <i class="fa fa-align-justify"></i>
+                    مشاهده اطلاعت بیشتر
+                </a>*@
+                @*}*@
+                @*@if (User.IsInRole(Auth.CanDeleteCustomer))
+                    {*@
+                @*<button class="btn-sm btn btn-danger"
+                            type="button" data-delete-url="@Url.Action("Delete", "Tour")" data-removal-element="#hotel-@Model.Id" id="remove-@Model.Id">
+                        <i class="fa fa-trash-o"></i>
+                        حذف
+                    </button>*@
+
+                <a href="@Url.Action("Cancel", "MainHotel", new {id = Model.Id})" class="btn btn-sm btn-danger" type="button">
+                    <i class="fa fa-align-justify"></i>
+                    انصراف
+                </a>
+                @*}*@
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+
+
+

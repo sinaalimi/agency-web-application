@@ -1,0 +1,67 @@
+﻿@using System.Web.Optimization
+@using Agency.Common.HtmlHelpers
+@model Agency.ViewModel.Room.CreateRoomViewModel
+@{
+    ViewBag.Title = "تعریف اتاق";
+}
+
+@using (Html.BeginForm("create", "Room", FormMethod.Post, new { role = "form", @class = "form-horizontal", autocomplete = "off", id = "CreateRoomForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+            @*<hr class="margin-bottom-5 margin-top-5" />*@
+            <div class="row" style="margin-top: 15px;">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(p => p.Type, new { @class = "control-label col-md-3" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(p => p.Type, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(p => p.Type, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            @Html.LabelFor(p => p.Capacity, new { @class = "control-label col-md-3" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(p => p.Capacity, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(p => p.Capacity, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="panel-footer">
+            <div class="pull-left">
+                <button type="button" autocomplete="off" onclick="AjaxForm.CustomSubmit(this, 'CreateRoomForm')" data-loading-text="در حال ارسال اطلاعات" class="btn btn-success btn-md">
+                    ثبت اتاق
+                </button>
+                <a href="@Url.Action("Index","Room")" class="btn btn-default btn-md">انصراف</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+
+    </div>
+}
+
+@section Menu{
+    @{Html.RenderPartial("_RoomManagmentSideBarMenu");}
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @*@Scripts.Render("~/bundles/datePicker")*@
+}
+
+
+
+

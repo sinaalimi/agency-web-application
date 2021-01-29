@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DoRecieve">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="centerNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DoRecieveResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetDelivery">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="centerNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetDeliveryResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="DoSend">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cellPhones" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="centerNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="persian" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="folder" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="DoSendResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DoSendResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ScuduledoSend">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cellPhones" type="tns:ArrayOfString" />
+            <s:element minOccurs="0" maxOccurs="1" name="message" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="centerNo" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="persian" type="s:boolean" />
+            <s:element minOccurs="1" maxOccurs="1" name="dateTime" type="s:dateTime" />
+            <s:element minOccurs="0" maxOccurs="1" name="folder" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ScuduledoSendResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ScuduledoSendResult" type="tns:ArrayOfString" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetInfoResult" type="tns:UserInfoModel" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="UserInfoModel">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Fname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Lname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Center" type="tns:ArrayOfDecimal" />
+          <s:element minOccurs="0" maxOccurs="1" name="Ip" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Msg" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Charge" type="s:long" />
+          <s:element minOccurs="0" maxOccurs="1" name="Folder" type="tns:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="ExpireDate" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Options" type="tns:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="Error" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfDecimal">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="decimal" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ChangePassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newpassword" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ChangePasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ChangePasswordResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="DoRecieveSoapIn">
+    <wsdl:part name="parameters" element="tns:DoRecieve" />
+  </wsdl:message>
+  <wsdl:message name="DoRecieveSoapOut">
+    <wsdl:part name="parameters" element="tns:DoRecieveResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetDeliverySoapIn">
+    <wsdl:part name="parameters" element="tns:GetDelivery" />
+  </wsdl:message>
+  <wsdl:message name="GetDeliverySoapOut">
+    <wsdl:part name="parameters" element="tns:GetDeliveryResponse" />
+  </wsdl:message>
+  <wsdl:message name="DoSendSoapIn">
+    <wsdl:part name="parameters" element="tns:DoSend" />
+  </wsdl:message>
+  <wsdl:message name="DoSendSoapOut">
+    <wsdl:part name="parameters" element="tns:DoSendResponse" />
+  </wsdl:message>
+  <wsdl:message name="ScuduledoSendSoapIn">
+    <wsdl:part name="parameters" element="tns:ScuduledoSend" />
+  </wsdl:message>
+  <wsdl:message name="ScuduledoSendSoapOut">
+    <wsdl:part name="parameters" element="tns:ScuduledoSendResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:ChangePassword" />
+  </wsdl:message>
+  <wsdl:message name="ChangePasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:ChangePasswordResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SMSZoneSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DoRecieve">
+      <wsdl:input message="tns:DoRecieveSoapIn" />
+      <wsdl:output message="tns:DoRecieveSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDelivery">
+      <wsdl:input message="tns:GetDeliverySoapIn" />
+      <wsdl:output message="tns:GetDeliverySoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="DoSend">
+      <wsdl:input message="tns:DoSendSoapIn" />
+      <wsdl:output message="tns:DoSendSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ScuduledoSend">
+      <wsdl:input message="tns:ScuduledoSendSoapIn" />
+      <wsdl:output message="tns:ScuduledoSendSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <wsdl:input message="tns:GetInfoSoapIn" />
+      <wsdl:output message="tns:GetInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <wsdl:input message="tns:ChangePasswordSoapIn" />
+      <wsdl:output message="tns:ChangePasswordSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="SMSZoneSoap" type="tns:SMSZoneSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoRecieve">
+      <soap:operation soapAction="http://tempuri.org/DoRecieve" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDelivery">
+      <soap:operation soapAction="http://tempuri.org/GetDelivery" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoSend">
+      <soap:operation soapAction="http://tempuri.org/DoSend" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScuduledoSend">
+      <soap:operation soapAction="http://tempuri.org/ScuduledoSend" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <soap:operation soapAction="http://tempuri.org/GetInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <soap:operation soapAction="http://tempuri.org/ChangePassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="SMSZoneSoap12" type="tns:SMSZoneSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoRecieve">
+      <soap12:operation soapAction="http://tempuri.org/DoRecieve" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDelivery">
+      <soap12:operation soapAction="http://tempuri.org/GetDelivery" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DoSend">
+      <soap12:operation soapAction="http://tempuri.org/DoSend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ScuduledoSend">
+      <soap12:operation soapAction="http://tempuri.org/ScuduledoSend" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetInfo">
+      <soap12:operation soapAction="http://tempuri.org/GetInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ChangePassword">
+      <soap12:operation soapAction="http://tempuri.org/ChangePassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SMSZone">
+    <wsdl:port name="SMSZoneSoap" binding="tns:SMSZoneSoap">
+      <soap:address location="http://new.smszone.ir/SMSZone.asmx" />
+    </wsdl:port>
+    <wsdl:port name="SMSZoneSoap12" binding="tns:SMSZoneSoap12">
+      <soap12:address location="http://new.smszone.ir/SMSZone.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

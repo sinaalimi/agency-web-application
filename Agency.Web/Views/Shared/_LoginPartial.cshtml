@@ -1,0 +1,60 @@
+﻿@using Agency.ServiceLayer.Security
+@using Auth = Agency.ServiceLayer.Security.AssignableToRolePermissions
+<div class="navbar-collapse collapse" id="navbar-main">
+    <ul class="nav navbar-nav" style="width: 100%">
+        @*<li class="main">
+            <a href="@Url.Action("Index", "Home")">صفحه اصلی</a>
+        </li>*@
+        @if (User.IsInRole(Auth.CanManageUser))
+        {
+            <li class="main">
+                @Html.ActionLink("مدیریت کاربران", "List", "User")
+                @*<a href="@Url.Action("", "")"><i class="fa fa-wechat"></i></a>*@
+            </li>
+        }
+        @if (User.IsInRole(Auth.CanManageHotel) && User.IsInRole("مدیر"))
+        {
+            <li class="main">
+                @Html.ActionLink("هتل", "List", "Hotel")
+            </li>
+        }
+        @if (User.IsInRole(Auth.CanManageVehicle) && User.IsInRole("مدیر"))
+        {
+            <li class="main">
+                @Html.ActionLink("وسیله نقلیه", "List", "Vehicle")
+            </li>
+        }
+        @if (User.IsInRole(Auth.CanManageTour))
+        {
+            <li class="main">
+                @Html.ActionLink("تور", "List", "Tour")
+            </li>
+        }
+        @if (User.IsInRole(Auth.CanManageReserve))
+        {
+            <li class="main">
+                @Html.ActionLink("رزرو", "List", "Reserve")
+            </li>
+        }
+        @if (User.IsInRole(Auth.CanManageReport))
+        {
+            <li class="main">
+                @Html.ActionLink("گزارش", "List", "Report")
+            </li>
+            @*<li class="main">
+                @Html.ActionLink("گزارش دفاتر","ListTour" , "Report")
+            </li>*@
+           
+        }
+        @*@if (User.IsInRole(Auth.CanManageSlider) && User.IsInRole("مدیر"))
+        {
+            <li class="main">
+                @Html.ActionLink("اسلایدر", "List", "Slider")
+            </li>
+        }*@
+
+        <li class="main" style="float: left;">
+            <a href="@Url.Action("LogOff","Account")">خروج</a>
+        </li>
+    </ul>
+</div>

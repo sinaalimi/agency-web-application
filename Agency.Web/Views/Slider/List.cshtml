@@ -1,0 +1,106 @@
+﻿@using System.Web.Optimization
+@using Agency.Common.HtmlHelpers
+@model Agency.ViewModel.Slider.SliderListViewModel
+@{
+    ViewBag.Title = "لیست اسلاید ها";
+}
+@Html.AntiForgeryToken()
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-12">
+                <button aria-controls="show-search" aria-expanded="false" class="btn btn-default  btn-block" data-target="#show-search" data-toggle="collapse" type="button">
+                    <i class="fa fa-search"></i>
+                    جستجو
+                </button>
+            </div>
+        </div>
+        <div class="row collapse" id="show-search">
+            <hr class="margin-top-5 margin-bottom-5" />
+            <div class="col-md-12">
+                @using (Ajax.BeginForm("ListAjax","SlIder", new AjaxOptions { AllowCache = false, HttpMethod = "POST", OnComplete = "searchOnComplete(xhr,status,'#progress','#ApplicantPager','#ApplicantList')" }, new { @class = "form-horizontal", autocomplete = "off", id = "ApplicantSearchForm" }))
+                {
+                    @Html.Hidden("PageIndex", Model.SearchRequest.PageIndex)
+                    @Html.Hidden("PageSize", Model.SearchRequest.PageSize)
+                    @Html.Hidden("CurrentSort", Model.SearchRequest.CurrentSort)
+                    @Html.Hidden("SortDirection", Model.SearchRequest.SortDirection)
+                    <div class="well">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Title">
+                                        <i class="fa fa-align-justify"></i>
+                                        عنوان
+                                    </label>
+                                    <input name="Title" id="Title" class="form-control input-sm"
+                                           placeholder="عنوان" type="text" value="">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label for="Index">
+                                        <i class="fa fa-list-alt"></i>
+                                        اندیس
+                                    </label>
+                                    <input name="Index" id="Index" class="form-control input-sm"
+                                           placeholder="اندیس" type="text" value="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="pull-left">
+                                    <button type="button" aria-controls="adv-search" aria-expanded="false" class=" btn btn-sm btn-primary" data-target="#adv-search" data-toggle="collapse"
+                                            id="slideSearchButton" autocomplete="off" onclick="directSearchPagingSorting('#progress', '#ApplicantSearchForm', '#ApplicantPager', '#ApplicantList', '#SortBy', '#SortOrder', '#PageSizer')" data-loading-text="درخواست">
+                                        <i class="fa fa-ellipsis-h"></i>
+                                        اعمال فیلتر
+                                    </button>
+                                    <button aria-controls="show-search" aria-expanded="false" onclick="resetSearch('#progress', '#ApplicantSearchForm', '#ApplicantPager', '#ApplicantList', '#SortBy', '#SortOrder', '#PageSizer')"
+                                            class=" btn btn-default btn-sm" data-target="#show-search" data-toggle="collapse" type="button">
+                                        <i class="fa fa-arrow-up"></i>
+                                        لغو فیلتر
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row" id="ApplicantList">
+            @{ Html.RenderPartial("_ListAjax", Model);}
+        </div>
+    </div>
+    <div class="panel-footer padding-5-5">
+        <div class="row">
+            <div class="col-md-offset-1 col-md-5">
+                <button data-page="2" id="ApplicantPager" onclick="paging('#progress', '#ApplicantSearchForm', this, '#SortBy', '#SortOrder', '#PageSizer')" class="btn btn-info btn-block btn-sm" type="button">
+                    بیشتر
+                </button>
+            </div>
+            <div class="col-md-2">
+                <i class="fa fa-filter fa-select"></i>
+                @Html.DropDownList("SortBy", Model.SortableList, new { @class = "form-control", onchange = "sorting('progress', 'ApplicantSearchForm', 'ApplicantPager', 'SortBy', 'SortOrder', 'ApplicantList','PageSizer');" })
+            </div>
+            <div class="col-md-2">
+                <i class="fa fa-filter fa-sort-alpha-asc fa-select"></i>
+                @Html.DropDownList("SortOrder", Model.SortOrderList, new { @class = "form-control", onchange = "sorting('progress', 'ApplicantSearchForm', 'ApplicantPager', 'SortBy', 'SortOrder', 'ApplicantList','PageSizer');" })
+            </div>
+            <div class="col-md-1">
+                <i class="fa fa-th-list fa-select"></i>
+                @Html.DropDownList("PageSizer", Model.PageSizeList, new { @class = "form-control", onchange = "sorting('progress', 'ApplicantSearchForm', 'ApplicantPager', 'SortBy', 'SortOrder', 'ApplicantList','PageSizer');" })
+            </div>
+        </div>
+        <div id="progress" align="center" style="display: none">
+            <img src="@Url.Content("~/Content/images/loading.gif")" alt="loading..." />
+        </div>
+    </div>
+</div>
+@section Menu{
+    @{Html.RenderPartial("_SlIderManagementSIdeBarMenu");}
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

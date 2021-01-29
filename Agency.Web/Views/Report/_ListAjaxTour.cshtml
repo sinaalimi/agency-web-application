@@ -1,0 +1,6 @@
+﻿@model  Agency.ViewModel.Tour.ListTourViewModel
+
+@foreach (var tour in Model.Tours)
+{
+    @Html.Partial("_ReportItem", tour)
+}

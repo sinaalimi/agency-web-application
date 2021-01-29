@@ -1,0 +1,37 @@
+﻿@model Agency.ViewModel.Jarime.JarimeViewModel
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h5 class="modal-title">کنسل کردن رزرو</h5>
+        </div>
+        @using (Ajax.BeginForm("CancelAllReserve", "Reserve", new { reserveId = Model.ReserveId, personId = Model.PersonId, penalty = Model.PenaltyPrice  }, new AjaxOptions { HttpMethod = "POST", OnComplete = "editModelaOnCompleteForCancel2(xhr, status, '','#modal','editVehicleForm','#editVehicleButton')" }, new { @class = "form-horizontal", id = "editVehicleForm", autocomplete = "off" }))
+        {
+            @Html.HiddenFor(p=>p.CodeRahgiri)
+            @Html.HiddenFor(p=>p.FinalTotalPrice)
+            @Html.HiddenFor(p=>p.IsParent)
+            @Html.HiddenFor(p=>p.ParentName)
+            @Html.HiddenFor(p=>p.PenaltyPrice)
+            @Html.HiddenFor(p=>p.Percent)
+            @Html.HiddenFor(p=>p.PersonId)
+            @Html.HiddenFor(p=>p.PersonName)
+            @Html.HiddenFor(p=>p.Price)
+            @Html.HiddenFor(p=>p.ReserveId)
+            @Html.HiddenFor(p=>p.TourName)
+            <div class="modal-body">
+                هزینه برای این فرد @Model.Price ریال بوده است که در صورت کنسل کردن
+                با کسر @Model.Percent درصد از هزینه پرداختی
+                مبلغ @Model.FinalTotalPrice باید به مشتری پرداخت شود
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="editVehicleButton"  autocomplete="off" onclick="AjaxForm.CustomSubmit(this, 'editVehicleForm')" data-loading-text="در حال ارسال اطلاعات" class="btn btn-success btn-md" >
+                    تایید 
+                </button>
+                <button class="btn btn-default btn-md" data-dismiss="modal" aria-hidden="true">
+                    انصراف
+                </button>
+            </div>
+        }
+    </div>
+</div>

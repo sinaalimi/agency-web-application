@@ -1,0 +1,25 @@
+﻿@using System.Globalization
+@model DateTime?
+
+@{
+    Func<DateTime, string> toPersianDate = date =>
+    {
+        var dateTime = new DateTime(date.Year, date.Month, date.Day, new GregorianCalendar());
+        var persianCalendar = new PersianCalendar();
+        return string.Format("{0}/{1}/{2}",
+            persianCalendar.GetYear(dateTime),
+            persianCalendar.GetMonth(dateTime).ToString("00"),
+            persianCalendar.GetDayOfMonth(dateTime).ToString("00"));
+    };
+    
+    var name = this.ViewContext.ViewData.TemplateInfo.HtmlFieldPrefix;
+    var value = Model.HasValue ? toPersianDate(Model.Value) : string.Empty;
+    var required = ViewData.ModelMetadata.IsRequired;
+    var displayName = ViewData.ModelMetadata.DisplayName;
+}
+<input type="text" class="form-control datepicker" @if (required){<text>data-val="true" data-val-required="لطفا @displayName را وارد کنید"</text>}  dir="ltr"
+           name="@name" id="@name"
+           value="@value" style="font-size: 14px;" />
+
+
+@*<input class="form-control numbertxt input-validation-error" data-val="true"  data-val-required="لطفا کد ملی را وارد کنید" id="NationalNumber" name="NationalNumber" type="text" value="" maxlength="10" aria-required="true" aria-describedby="NationalNumber-error">*@

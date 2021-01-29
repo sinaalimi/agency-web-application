@@ -1,0 +1,11 @@
+﻿@using Agency.ServiceLayer.Security
+@using Auth = Agency.ServiceLayer.Security.AssignableToRolePermissions
+
+@using Agency.Web.HtmlHelpers
+@if (User.IsInRole(Auth.CanManageReserve))
+{
+    @Html.SideBarSecureActionLink("نمایش لیست رزروها", Url.Action("List", "Reserve"), "list-group-item second-split", "fa fa-user", AssignableToRolePermissions.CanManageUser)
+
+}
+
+

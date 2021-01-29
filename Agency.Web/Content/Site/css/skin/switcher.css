@@ -1,0 +1,131 @@
+
+/* Color Switcher */
+
+#color-switcher {
+background:#333;
+border-radius: 0 0 3px;
+box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+left: -255px;
+position: fixed;
+top: 168px;
+width: 255px;
+z-index: 9999;
+}
+#color-switcher div {
+padding: 0px 10px;
+}
+#color-switcher h2 {
+color: #fff;
+font-size: 16px;
+margin-bottom: 0;
+margin-right: 0;
+margin-top: 0;
+padding: 10px 0;
+text-align: center;
+text-transform: uppercase;
+}
+#color-switcher h2 a {
+background: #42c0d9 none repeat scroll 0 0;
+-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+-moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+-ms-box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
+display: block;
+height: 50px;
+position: absolute;
+right: -50px;
+top: 0;
+width: 50px;
+-webkit-border-radius:0 5px 5px 0;
+-moz-border-radius:0 5px 5px 0;
+border-radius:0 5px 5px 0;
+}
+#color-switcher h2 a .fa {
+color: #fff;
+font-size: 26px;
+left: 12px;
+position: absolute;
+top: 12px;
+}
+.colors {
+  padding-left: 7px;
+}
+.colors {
+  list-style: none;
+  margin: 0px 0px 10px 0px;
+  overflow: hidden;
+}
+.colors li {
+  float: left;
+}
+.colors li a {
+border: 3px solid transparent;
+-webkit-border-radius:50%;
+-moz-border-radius:50%;
+border-radius:50%;
+cursor: pointer;
+display: block;
+height: 45px;
+margin: 6px;
+width: 45px;
+}
+.layout-style select {
+  width: 100%;
+  padding: 5px;
+  border: none;
+  margin: 0 0 0 -5px;
+  color: #fff;
+  cursor: pointer;
+}
+#reset {
+  margin: 0 0 15px 2px;
+}
+#reset a {
+  color: #fff;
+  font-size: 12px;
+}
+.color1 {
+  background: #00bcd4;
+}
+.color2 {
+  background: #cddc39;
+}
+.color3 {
+  background: #006c53;
+}
+.color4 {
+  background: #ff8f00;
+}
+.color5 {
+  background: #e34b11;
+}
+.color6 {
+  background: #9c28b1;
+}
+.color7 {
+  background: #e72063;
+}
+.color8 {
+  background: #2f7af8;
+}
+.color9 {
+  background: #82b440;
+}
+.color10 {
+  background: #34bfba;
+}
+
+.color11 {
+  background: #7662b7;
+}
+
+.color12 {
+  background: #c1b72b;
+}
+
+
+.colors li a.active {
+  border-color:#fff;
+}
+
+

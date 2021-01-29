@@ -1,0 +1,90 @@
+﻿@using System.Web.Optimization
+@using Agency.Common.HtmlHelpers
+@model Agency.ViewModel.ReserveHotel.ReserveHotelSearchRequest
+<div class="row">
+    <div class="col-md-12">
+        <button aria-controls="show-search" aria-expanded="false" class="btn btn-default  btn-block" data-target="#show-search" data-toggle="collapse" type="button">
+            <i class="fa fa-search"></i>
+            جستجو
+        </button>
+    </div>
+</div>
+<div class="row collapse" id="show-search">
+    <hr class="margin-top-5 margin-bottom-5" />
+    <div class="col-md-12">
+        @*@Html.HelpAlert(Url.Content("~/Content/Images/lightbulb.png"),
+            "با استفاده از فرم زیر ، امکان جستجوی پیشرفته بین مشتری ها را خواهید داشت.",
+            "برای لغو فیلتر اعمال شده میتوانید از دکمه لغو استفاده کنید.")*@
+        @using (Ajax.BeginForm("ListAjax", "ReserveHotel", new AjaxOptions { AllowCache = false, HttpMethod = "POST", OnComplete = "searchOnComplete(xhr,status,'#progress','#ApplicantPager','#ListHotel')" }, new { @class = "form-horizontal", autocomplete = "off", id = "ApplicantSearchForm" }))
+        {
+            @Html.Hidden("PageIndex", Model.PageIndex)
+            @Html.Hidden("PageSize", Model.PageSize)
+            @Html.Hidden("CurrentSort", Model.CurrentSort)
+            @Html.Hidden("SortDirection", Model.SortDirection)
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.StateId, htmlAttributes: new {@class = "control-label col-md-3"})
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(p => p.StateId, Model.States, "انتخاب استان ", new {@onchange = "FillCity()", @id = "DropDownState", @class = "form-control"})
+                                @Html.ValidationMessageFor(model => model.StateId, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.CityId, new {@class = "control-label col-md-3"})
+                            <div class="col-md-6">
+                                @Html.DropDownListFor(p => p.CityId, Model.Cities, "انتخاب شهر ", new {@id = "DropDownCities", @class = "form-control"})
+                                @Html.ValidationMessageFor(model => model.CityId, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.StartDate, new {@class = "control-label col-md-3"})
+                            <div class="col-md-6">
+                                @Html.EditorFor(model => model.StartDate, new {placeholder = "تاریخ شروع", @class = "form-control input-sm",})
+                                @Html.ValidationMessageFor(model => model.StartDate, "", new {@class = "text-danger"})
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Night, new { @class = "control-label col-md-3" })
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.Night, new { placeholder = "به مدت", @class = "form-control input-sm", })
+                                @Html.ValidationMessageFor(model => model.Night, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                  
+                  
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="pull-left">
+                                <button type="button" aria-controls="adv-search" aria-expanded="false" class="btn btn-sm btn-primary" data-target="#adv-search" data-toggle="collapse"
+                                        id="slideSearchButton" autocomplete="off" onclick="directSearchPagingSorting('#progress', '#ApplicantSearchForm', '#ApplicantPager', '#ListHotel', '#SortBy', '#SortOrder', '#PageSizer')" data-loading-text="درخواست">
+                                    <i class="fa fa-ellipsis-h"></i>
+                                    اعمال فیلتر
+                                </button>
+                                <button aria-controls="show-search" aria-expanded="false" onclick="resetSearch('#progress', '#ApplicantSearchForm', '#ApplicantPager', '#ListHotel', '#SortBy', '#SortOrder', '#PageSizer')"
+                                        class=" btn btn-default btn-sm" data-target="#show-search" data-toggle="collapse" type="button">
+                                    <i class="fa fa-arrow-up"></i>
+                                    لغو فیلتر
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                }
+            </div>
+           
+    </div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

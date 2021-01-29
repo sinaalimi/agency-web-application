@@ -1,0 +1,144 @@
+﻿@using System.Runtime.CompilerServices
+@using System.Web.Optimization
+@using Agency.Common.HtmlHelpers
+@model Agency.ViewModel.Hotel.EditHotelViewModel
+
+@using (Html.BeginForm("Edit", "Hotel", FormMethod.Post, new { role = "form", @class = "form-horizontal", autocomplete = "off", id = "createCustomerForm", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(p => p.Id)
+    <div class="panel panel-default">
+        <div class="panel-heading">
+        </div>
+        <div class="panel-body">
+            <div class="row" style="margin-top: 15px;">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.Name, new {@class = "control-label col-md-3"})
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(p => p.Name, new {@class = "form-control"})
+                            @Html.ValidationMessageFor(p => p.Name, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.PhoneNumber, new { @class = "control-label col-md-3" })
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(p => p.PhoneNumber, new { @class = "form-control numbertxt" })
+                            @Html.ValidationMessageFor(p => p.PhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.StateId, htmlAttributes: new {@class = "control-label col-md-3"})
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(p => p.StateId, Model.States, "انتخاب استان", new {@onchange = "FillCity()", @id = "DropDownState", @class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.StateId, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CityId, new {@class = "control-label col-md-3"})
+                        <div class="col-md-6">
+                            @Html.DropDownListFor(p => p.CityId, Model.Cities, "انتخاب شهر", new {@id = "DropDownCities", @class = "form-control"})
+                            @Html.ValidationMessageFor(model => model.CityId, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.ManagerName, new {@class = "control-label col-md-3"})
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(p => p.ManagerName, new {@class = "form-control "})
+                            @Html.ValidationMessageFor(p => p.ManagerName, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.Address, new { @class = "control-label col-md-3" })
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(p => p.Address, new { @class = "form-control " })
+                            @Html.ValidationMessageFor(p => p.Address, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+
+            <div class="row">
+               
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(p => p.Degree, new {@class = "control-label col-md-3"})
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(p => p.Degree, new {@class = "form-control numbertxt" })
+                            @Html.ValidationMessageFor(p => p.Degree, "", new {@class = "text-danger"})
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PicSrFile, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-6">
+                            @Html.TextBoxFor(model => model.PicSrFile, new { type = "file", @class = "form-control " })
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="row" style="margin-right: -35px;">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-10">
+                                @Html.TextAreaFor(model => model.Description)
+                                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+        <div class="panel-footer">
+            <div class="pull-left">
+                <button type="button" autocomplete="off" onclick="AjaxForm.CustomSubmit(this, 'createCustomerForm')" data-loading-text="در حال ارسال اطلاعات" class="btn btn-success btn-md">
+                    ذخیره تغییرات
+                </button>
+                <a href="@Url.Action("List", "Hotel")" class="btn btn-default btn-md">انصراف</a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+       </div>
+   
+}
+<script type="text/javascript" src="~/Content/ckfinder/ckfinder.js"></script>
+<script type="text/javascript" src="~/Content/ckeditor/ckeditor.js"></script>
+<script type="text/javascript">
+    var editor = CKEDITOR.instances["editor1"];
+    if (editor) { editor.destroy(true); }
+    CKEDITOR.replace('Description', {
+        enterMode: CKEDITOR.ENTER_BR,
+    });
+    CKFinder.setupCKEditor(null, '@Url.Content("~/Content/ckfinder/")');
+</script>
+@section Menu{
+    @{Html.RenderPartial("_HotelManagementSideBarMenu");}
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/datePicker")
+}

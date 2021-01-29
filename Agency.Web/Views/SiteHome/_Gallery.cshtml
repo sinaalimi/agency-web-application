@@ -1,0 +1,105 @@
+﻿@model Agency.ViewModel.Home.GalleryViewModel
+<section id="gallery">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-title text-center">
+                    <h1>گالری</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <ul id="filter-list">
+                    <li class="filter" data-filter="all">همه</li>
+                    <li class="filter" data-filter="tours">تور ها</li>
+                    @*<li class="filter" data-filter="flights">flights</li>*@
+                    @*<li class="filter" data-filter="cruises">cruises</li>*@
+                    <li class="filter" data-filter="hotels">هتل ها</li>
+                </ul><!--  #filter-list -->
+            </div>
+        </div>
+    </div>
+
+    <ul class="gallery-item">
+        @foreach (var item in Model.Hotels)
+        {
+            <li class="gallery hotels">
+                <div class="thumb">
+                    <img src="~/Content/HotelPhotoes/@item.ImageSource" alt="" />
+                    <div class="gallery-overlay">
+                        <div class="gallery-overlay-inner">
+                            <h2>@item.Name</h2>
+                            <a href="~/Content/HotelPhotoes/@item.ImageSource" class="fancybox"><i class="fa fa-camera"></i></a>
+                        </div>
+                    </div>
+                </div><!--end post thumb-->
+            </li>
+        }
+
+        @foreach (var item in Model.Tours)
+        {
+            <li class="gallery tours">
+                <div class="thumb">
+                    <img src="~/Content/TourPhotoes/@item.ImageSrc" alt="" />
+                    <div class="gallery-overlay">
+                        <div class="gallery-overlay-inner">
+                            <h2>@item.Title</h2>
+                            <a href="~/Content/HotelPhotoes/@item.ImageSrc" class="fancybox"><i class="fa fa-camera"></i></a>
+                        </div>
+                    </div>
+                </div><!--end post thumb-->
+            </li>
+        }
+        @*<li class="gallery tours hotels">
+            <div class="thumb">
+                <img src="~/Content/Site/img/gallery/1.jpg" alt=""/>
+                <div class="gallery-overlay">
+                    <div class="gallery-overlay-inner">
+                        <h2>تور شمال</h2>
+                        <a href="~/Content/Site/img/gallery/1.jpg" class="fancybox"><i class="fa fa-camera"></i></a>
+                    </div>
+                </div>
+            </div><!--end post thumb-->
+        </li>
+
+        <li class="gallery hotels">
+            <div class="thumb">
+                <img src="~/Content/Site/img/gallery/4.jpg" alt=""/>
+                <div class="gallery-overlay">
+                    <div class="gallery-overlay-inner">
+                        <h2>هتل آنا</h2>
+                        <a href="~/Content/Site/img/gallery/4.jpg" class="fancybox"><i class="fa fa-camera"></i></a>
+                    </div>
+                </div>
+            </div><!--end post thumb-->
+        </li>
+
+        <li class="gallery tours flights">
+            <div class="thumb">
+                <img src="~/Content/Site/img/gallery/5.jpg" alt=""/>
+                <div class="gallery-overlay">
+                    <div class="gallery-overlay-inner">
+                        <h2>تور آذربایجان</h2>
+                        <a href="~/Content/Site/img/gallery/5.jpg" class="fancybox"><i class="fa fa-camera"></i></a>
+                    </div>
+                </div>
+            </div><!--end post thumb-->
+        </li>
+
+        <li class="gallery hotels tours">
+            <div class="thumb">
+                <img src="~/Content/Site/img/gallery/8.jpg" alt=""/>
+                <div class="gallery-overlay">
+                    <div class="gallery-overlay-inner">
+                        <h2>تور تهران</h2>
+                        <a href="~/Content/Site/img/gallery/8.jpg" class="fancybox"><i class="fa fa-camera"></i></a>
+                    </div>
+                </div>
+            </div><!--end post thumb-->
+        </li>*@
+
+    </ul>
+
+</section>

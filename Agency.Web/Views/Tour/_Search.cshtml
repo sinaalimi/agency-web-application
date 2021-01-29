@@ -1,0 +1,77 @@
+﻿@using Agency.Common.HtmlHelpers
+@model Agency.ViewModel.Tour.TourSearchRequest
+<div class="row">
+    <div class="col-md-12">
+        <button aria-controls="show-search" aria-expanded="false" class="btn btn-default  btn-block" data-target="#show-search" data-toggle="collapse" type="button">
+            <i class="fa fa-search"></i>
+            جستجو
+        </button>
+    </div>
+</div>
+<div class="row collapse" id="show-search">
+    <hr class="margin-top-5 margin-bottom-5" />
+    <div class="col-md-12">
+        @using (Ajax.BeginForm("ListAjax", "Tour", new AjaxOptions { AllowCache = false, HttpMethod = "POST", OnComplete = "searchOnComplete(xhr,status,'#progress','#ApplicantPager','#ListVehicle')" }, new { @class = "form-horizontal", autocomplete = "off", id = "ApplicantSearchForm" }))
+        {
+            @Html.Hidden("PageIndex", Model.PageIndex)
+            @Html.Hidden("PageSize", Model.PageSize)
+            @Html.Hidden("CurrentSort", Model.CurrentSort)
+            @Html.Hidden("SortDirection", Model.SortDirection)
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="Title">
+                                <i class="fa fa-align-justify"></i>
+                                عنوان
+                            </label>
+                            @Html.TextBoxFor(p => p.Title, new {@class = "form-control input-sm"})
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="RegisterDate">
+                                <i class="fa fa-list-alt"></i>
+                                تاریخ ثبت
+                            </label>
+
+                            @Html.EditorFor(model => model.StartTime, new { placeholder = "تاریخ اعزام", @class = "form-control input-sm", })
+
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <div>
+                                <label for="Title">
+                                    <i class="fa fa-align-justify"></i>
+                                    کنسل شده
+                                </label>
+                            </div>
+                            <div>
+                                @Html.CheckBoxFor(p => p.IsCanceled, new { @class = "checkbox-inline",style= "-webkit-transform: scale(2); margin-right:60px; -ms-transform: scale(2); -moz-transform: scale(2);" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="pull-left">
+                            <button type="button" aria-controls="adv-search" aria-expanded="false" class=" btn btn-sm btn-primary" data-target="#adv-search" data-toggle="collapse"
+                                    id="slideSearchButton" autocomplete="off" onclick="directSearchPagingSorting('#progress', '#ApplicantSearchForm', '#ApplicantPager', '#ListVehicle', '#SortBy', '#SortOrder', '#PageSizer')" data-loading-text="درخواست">
+                                <i class="fa fa-ellipsis-h"></i>
+                                اعمال فیلتر
+                            </button>
+                            <button aria-controls="show-search" aria-expanded="false" onclick="resetSearch('#progress', '#ApplicantSearchForm', '#ApplicantPager', '#ListVehicle', '#SortBy', '#SortOrder', '#PageSizer')"
+                                    class=" btn btn-default btn-sm" data-target="#show-search" data-toggle="collapse" type="button">
+                                <i class="fa fa-arrow-up"></i>
+                                لغو فیلتر
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

@@ -1,0 +1,55 @@
+﻿@model Agency.ViewModel.Tour.ListTourSummeryViewModel
+
+<section id="packages" class="inverse">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="section-title text-center">
+                    <h1>آخرین پکیج ها</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @foreach (var tour in Model.Tours)
+            {
+                var days = (tour.EndTime - tour.StartTime).Days;
+                <div class="col-xs-6 col-sm-6 col-md-4">
+                    <div class="package-list wow fadeInUp">
+                        <a href="@Url.Action("GetTour", new {id = tour.Id})">
+                            <div class="package-thumb">
+                                <img src="~/Content/TourPhotoes/@tour.ImageSrc" alt=""/>
+                                <div class="duration">
+                                    @days روز
+                                </div>
+                            </div>
+                            <div class="package-info">
+                                <hr style="margin-top: 0; margin-bottom: 0; border-width: 3px;"/>
+
+                                <h3>@tour.Title</h3>
+                                <p>
+                                    @tour.Summery
+                                </p>
+                                @*<span class="pull-left" style="position: absolute; bottom: 13px; left: 15px;">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <span class="review-count"> - 100 review</span>
+                                </span>*@
+                                @*<span class="pull-right price">$1400</span>*@
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            }
+        </div>
+        <div style="text-align: center;">
+            <div>
+                <a href="@Url.Action("GetAllTours", "SiteHome")" class="btn btn-info" style="margin-top: 20px; width: 170px;">همه تور ها</a>
+            </div>
+        </div>
+        
+    </div>
+</section>
